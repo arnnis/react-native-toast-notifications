@@ -1,6 +1,7 @@
 # react-native-animated-toast
 
-A Toast components for react-native, supports Android, IOS, Web, Windows, no native dependency
+A Toast component for react-native
+supports Android, IOS, Web, Windows
 
 ## Features
 
