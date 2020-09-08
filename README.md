@@ -58,25 +58,25 @@ toast.current.show('Task finished successfully', { type: 'success' })
 or
 
 ```js
-    <Toast
-      ref={toast}
-      icon={<Icon />}
-      successIcon={<SuccessIcon />}
-      dangerIcon={<DangerIcon />}
-      warningIcon={<WarningIcon />}
-    />
+<Toast
+  ref={toast}
+  icon={<Icon />}
+  successIcon={<SuccessIcon />}
+  dangerIcon={<DangerIcon />}
+  warningIcon={<WarningIcon />}
+/>
 }
 ```
 
 ## Customize
 
 ```js
-    toast.current.show('Task finished successfully', {
-        duration: 5000,
-        style: { padding: 0 },
-        textStyle: { fontSize: 20 }
-    })
-}
+toast.current.show('Task finished successfully', {
+   duration: 5000,
+   style: { padding: 0 },
+   textStyle: { fontSize: 20 }
+})
+
 ```
 
 You can customize default options in Toast component
