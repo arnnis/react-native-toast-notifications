@@ -1,4 +1,4 @@
-# react-native-animated-toast
+# react-native-fast-toast
 
 A Toast components for react-native, supports Android, IOS, Web, Windows, no native dependency
 
@@ -18,7 +18,7 @@ A Toast components for react-native, supports Android, IOS, Web, Windows, no nat
 Open a Terminal in the project root and run:
 
 ```sh
-yarn add react-native-animated-toast
+yarn add react-native-fast-toast
 ```
 
 ## Basic Example
@@ -26,7 +26,7 @@ yarn add react-native-animated-toast
 ```js
 import React, { useEffect, useRef } from "react";
 import { View, StyleSheet } from "react-native";
-import Toast from "react-native-animated-toast";
+import Toast from "react-native-fast-toast";
 
 export default function App() {
   const toast = useRef(null);

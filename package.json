@@ -1,8 +1,12 @@
 {
-  "name": "react-native-animated-toast",
+  "name": "react-native-fast-toast",
   "version": "1.0.1",
   "main": "index.js",
   "license": "MIT",
+  "author": {
+    "name": "Alireza Rezania",
+    "email": "alireza.rzna@gmail.com"
+  },
   "devDependencies": {
     "@types/react": "^16.9.49",
     "@types/react-native": "^0.63.15"

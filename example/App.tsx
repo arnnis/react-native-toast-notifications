@@ -2,7 +2,7 @@ import { StatusBar } from "expo-status-bar";
 import React, { useRef, useEffect } from "react";
 import { StyleSheet, Text, View } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
-import Toast from "../src/toast-container";
+import Toast from "react-native-fast-toast";
 
 export default function App() {
   const toastRef = useRef<Toast>(null);
