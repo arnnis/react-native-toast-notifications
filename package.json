@@ -1,0 +1,10 @@
+{
+  "name": "react-native-animated-toast",
+  "version": "1.0.1",
+  "main": "index.js",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/react": "^16.9.49",
+    "@types/react-native": "^0.63.15"
+  }
+}
