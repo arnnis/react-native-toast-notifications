@@ -1,13 +1,13 @@
 # react-native-fast-toast
 
-A Toast components for react-native, supports Android, IOS, Web, Windows, no native dependency
+A Toast component for react-native, supports Android, IOS, Web, Windows
 
 ## Features
 
 - Normal, Success, Danger and Warning toasts
 - Customizable and Icon support
 - Smooth animation
-- Fully typed with [TypeScript]
+- Fully typed with TypeScript
 
 ## Demo
 
@@ -41,45 +41,42 @@ export default function App() {
       <Toast ref={toast} />
     </>
   );
-}
 ```
 
 ## Type Example
 
 ```js
-    toast.current.show('Task finished successfully', { type: 'success' })
-}
+toast.current.show('Task finished successfully', { type: 'success' })
 ```
 
 ## Icon Example
 
 ```js
-    toast.current.show('Task finished successfully', { icon: <Icon /> })
-}
+ toast.current.show('Task finished successfully', { icon: <Icon /> })
 ```
 
 or
 
 ```js
-    <Toast
-      ref={toast}
-      icon={<Icon />}
-      successIcon={<SuccessIcon />}
-      dangerIcon={<DangerIcon />}
-      warningIcon={<WarningIcon />}
-    />
+<Toast
+  ref={toast}
+  icon={<Icon />}
+  successIcon={<SuccessIcon />}
+  dangerIcon={<DangerIcon />}
+  warningIcon={<WarningIcon />}
+/>
 }
 ```
 
 ## Customize
 
 ```js
-    toast.current.show('Task finished successfully', {
-        duration: 5000,
-        style: { padding: 0 },
-        textStyle: { fontSize: 20 }
-    })
-}
+toast.current.show('Task finished successfully', {
+   duration: 5000,
+   style: { padding: 0 },
+   textStyle: { fontSize: 20 }
+})
+
 ```
 
 You can customize default options in Toast component
@@ -94,6 +91,3 @@ Pull request are welcome.
 
 While developing, you can run the [example app](/example) to test your changes.
 
-```
-
-```
