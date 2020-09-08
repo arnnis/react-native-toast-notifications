@@ -7,7 +7,7 @@ A Toast component for react-native, supports Android, IOS, Web, Windows
 - Normal, Success, Danger and Warning toasts
 - Customizable and Icon support
 - Smooth animation
-- Fully typed with [TypeScript]
+- Fully typed with TypeScript
 
 ## Demo
 
