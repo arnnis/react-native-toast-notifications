@@ -46,14 +46,13 @@ export default function App() {
 ## Type Example
 
 ```js
-    toast.current.show('Task finished successfully', { type: 'success' })
-}
+toast.current.show('Task finished successfully', { type: 'success' })
 ```
 
 ## Icon Example
 
 ```js
-    toast.current.show('Task finished successfully', { icon: <Icon /> })
+ toast.current.show('Task finished successfully', { icon: <Icon /> })
 ```
 
 or
