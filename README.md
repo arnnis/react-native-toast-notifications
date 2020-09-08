@@ -41,7 +41,6 @@ export default function App() {
       <Toast ref={toast} />
     </>
   );
-}
 ```
 
 ## Type Example
@@ -55,7 +54,6 @@ export default function App() {
 
 ```js
     toast.current.show('Task finished successfully', { icon: <Icon /> })
-}
 ```
 
 or
