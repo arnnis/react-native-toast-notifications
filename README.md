@@ -91,6 +91,3 @@ Pull request are welcome.
 
 While developing, you can run the [example app](/example) to test your changes.
 
-```
-
-```
