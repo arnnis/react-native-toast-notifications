@@ -59,7 +59,6 @@ export default function App() {
     // Here
     global['toast'] = toast.current
 
-    // Note: Check index.d.ts in example app for typescript declaration.
   }, []);
 
   return (
@@ -71,6 +70,8 @@ export default function App() {
 ```
 
 now you can call `toast.show()` everywhere on app. like alert.
+
+Check [index.d.ts](/example/index.d.ts) in example app for typescript.
 
 ## Type Example
 
