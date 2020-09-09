@@ -1,7 +1,7 @@
 {
   "name": "react-native-fast-toast",
-  "version": "1.0.1",
-  "main": "index.js",
+  "version": "1.0.4",
+  "main": "index.ts",
   "license": "MIT",
   "author": {
     "name": "Alireza Rezania",

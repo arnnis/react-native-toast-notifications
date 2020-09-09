@@ -8,17 +8,8 @@ export default function App() {
   const toastRef = useRef<Toast>(null);
 
   useEffect(() => {
-    // let id = toastRef.current?.show("This is a warning", {
-    //   duration: 6000,
-    //   type: "warning",
-    // });
-    // setTimeout(() => {
-    //   if (id) {
-    //     toastRef.current?.update(id, "This is not a warning", {
-    //       type: "danger",
-    //     });
-    //   }
-    // }, 1000);
+    // @ts-ignore
+    global["toast"] = toastRef.current;
   }, []);
 
   return (
