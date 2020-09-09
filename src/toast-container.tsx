@@ -23,6 +23,7 @@ class ToastContainer extends Component<ToastOptions, State> {
     this.setState({
       toasts: [{ id, onClose, message, ...toastOptions }, ...this.state.toasts],
     });
+    return id
   };
 
   update = (id: string, message: string, toastOptions?: ToastOptions) => {
