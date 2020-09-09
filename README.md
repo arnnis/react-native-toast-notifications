@@ -44,6 +44,7 @@ export default function App() {
 ```
 
 ## Global Example
+
 If you want to have one Toast and use it everywhere on your app. do this in root component of your app (index.js or App.js)
 
 ```js
@@ -57,6 +58,8 @@ export default function App() {
   useEffect(() => {
     // Here
     global['toast'] = toast.current
+
+    // Note: Check index.d.ts in example app for typescript declaration.
   }, []);
 
   return (
@@ -66,18 +69,19 @@ export default function App() {
     </>
   );
 ```
-now you can call ```toast.show()``` everywhere on app. like alert.
+
+now you can call `toast.show()` everywhere on app. like alert.
 
 ## Type Example
 
 ```js
-toast.current.show('Task finished successfully', { type: 'success' })
+toast.current.show("Task finished successfully", { type: "success" });
 ```
 
 ## Icon Example
 
 ```js
- toast.current.show('Task finished successfully', { icon: <Icon /> })
+toast.current.show("Task finished successfully", { icon: <Icon /> });
 ```
 
 or
@@ -96,12 +100,11 @@ or
 ## Customize
 
 ```js
-toast.current.show('Task finished successfully', {
-   duration: 5000,
-   style: { padding: 0 },
-   textStyle: { fontSize: 20 }
-})
-
+toast.current.show("Task finished successfully", {
+  duration: 5000,
+  style: { padding: 0 },
+  textStyle: { fontSize: 20 },
+});
 ```
 
 You can customize default options in Toast component
@@ -115,4 +118,3 @@ You can customize default options in Toast component
 Pull request are welcome.
 
 While developing, you can run the [example app](/example) to test your changes.
-

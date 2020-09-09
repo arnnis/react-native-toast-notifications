@@ -9,8 +9,6 @@ export default function App() {
 
   useEffect(() => {
     global["toast"] = toastRef.current;
-
-    toast?.show("Global call toast");
   }, []);
 
   return (
