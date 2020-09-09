@@ -8,8 +8,9 @@ export default function App() {
   const toastRef = useRef<Toast>(null);
 
   useEffect(() => {
-    // @ts-ignore
     global["toast"] = toastRef.current;
+
+    toast?.show("Global call toast");
   }, []);
 
   return (
@@ -96,6 +97,15 @@ export default function App() {
         style={[styles.test, { marginTop: 30 }]}
       >
         Update a Toast
+      </Text>
+
+      <Text
+        onPress={() => {
+          toast?.show("Global toast call");
+        }}
+        style={[styles.test, { marginTop: 30 }]}
+      >
+        Global toast call
       </Text>
     </View>
   );
