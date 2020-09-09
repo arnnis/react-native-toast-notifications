@@ -25,7 +25,7 @@ yarn add react-native-fast-toast
 
 ```js
 import React, { useEffect, useRef } from "react";
-import { View, StyleSheet } from "react-native";
+import { View } from "react-native";
 import Toast from "react-native-fast-toast";
 
 export default function App() {
@@ -42,6 +42,31 @@ export default function App() {
     </>
   );
 ```
+
+## Global Example
+If you want to have one Toast and use it everywhere on your app. do this in root component of your app (index.js or App.js)
+
+```js
+import React, { useEffect, useRef } from "react";
+import { View } from "react-native";
+import Toast from "react-native-fast-toast";
+
+export default function App() {
+  const toast = useRef(null);
+
+  useEffect(() => {
+    // Here
+    global['toast'] = toast.current
+  }, []);
+
+  return (
+    <>
+      <RestOfYourApp />
+      <Toast ref={toast} />
+    </>
+  );
+```
+now you can call ```toast.show()``` everywhere on app. like alert.
 
 ## Type Example
 
