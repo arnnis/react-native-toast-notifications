@@ -53,18 +53,11 @@ import { View } from "react-native";
 import Toast from "react-native-fast-toast";
 
 export default function App() {
-  const toast = useRef(null);
-
-  useEffect(() => {
-    // Here
-    global['toast'] = toast.current
-
-  }, []);
-
+  
   return (
     <>
       <RestOfYourApp />
-      <Toast ref={toast} />
+      <Toast ref={(ref) => (global['toast'] = ref)} />
     </>
   );
 ```
