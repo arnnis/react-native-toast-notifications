@@ -23,7 +23,7 @@ class ToastContainer extends Component<ToastOptions, State> {
     this.setState({
       toasts: [{ id, onClose, message, ...toastOptions }, ...this.state.toasts],
     });
-    return id
+    return id;
   };
 
   update = (id: string, message: string, toastOptions?: ToastOptions) => {
@@ -41,7 +41,7 @@ class ToastContainer extends Component<ToastOptions, State> {
   render() {
     const { toasts } = this.state;
     return (
-      <View style={styles.container}>
+      <View style={styles.container} pointerEvents="none">
         {toasts.map((toast) => (
           <Toast key={toast.id} {...this.props} {...toast} />
         ))}
@@ -58,9 +58,10 @@ const styles = StyleSheet.create({
     bottom: 100,
     justifyContent: "flex-end",
     alignItems: "center",
-    // backgroundColor: "green",
     borderRadius: 5,
     zIndex: 999,
+    left: "10%",
+    right: "10%",
   },
   message: {
     color: "#333",
