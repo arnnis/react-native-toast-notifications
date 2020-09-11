@@ -25,7 +25,6 @@ yarn add react-native-fast-toast
 
 ```js
 import React, { useEffect, useRef } from "react";
-import { View } from "react-native";
 import Toast from "react-native-fast-toast";
 
 export default function App() {
@@ -48,16 +47,13 @@ export default function App() {
 If you want to have one Toast and use it everywhere on your app. do this in root component of your app (index.js or App.js)
 
 ```js
-import React, { useEffect, useRef } from "react";
-import { View } from "react-native";
 import Toast from "react-native-fast-toast";
 
 export default function App() {
-  
   return (
     <>
       <RestOfYourApp />
-      <Toast ref={(ref) => (global['toast'] = ref)} />
+      <Toast ref={(ref) => global['toast'] = ref} />
     </>
   );
 ```
