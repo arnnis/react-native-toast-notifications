@@ -4397,10 +4397,10 @@ react-native-appearance@~0.3.3:
     invariant "^2.2.4"
     use-subscription "^1.0.0"
 
-react-native-fast-toast@^1.0.5:
-  version "1.0.5"
-  resolved "https://registry.yarnpkg.com/react-native-fast-toast/-/react-native-fast-toast-1.0.5.tgz#add61c38bea748f7c25c473cfb8c5ff14d790d05"
-  integrity sha512-rWlxnf9vXQckbl/tkIpQLw+xzjBR+3CiDl0ByTWjdlHzIiOj3Yj/r7YkfxM42ODY0LIWBrUEj596WtJHR499bA==
+react-native-fast-toast@^1.0.7:
+  version "1.0.7"
+  resolved "https://registry.yarnpkg.com/react-native-fast-toast/-/react-native-fast-toast-1.0.7.tgz#0ed9252d1aaf89bfb993b958c45b8a14eac0fbb0"
+  integrity sha512-MX95EQ9CW8C1sxbNsK6JJoEf643mosDSamYZAUsNLqJHpmN1iePV2I7Aae95GdX29mYGiPnpcF9+N1SSayD36w==
 
 react-native-safe-area-context@~3.0.7:
   version "3.0.7"
