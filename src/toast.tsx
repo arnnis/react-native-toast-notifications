@@ -6,6 +6,7 @@ import {
   StyleProp,
   ViewStyle,
   TextStyle,
+  Text,
 } from "react-native";
 
 export interface ToastOptions {
@@ -23,7 +24,8 @@ export interface ToastOptions {
 export interface ToastProps extends ToastOptions {
   id: string;
   onClose(id: string): void;
-  message: string;
+  message: string | JSX.Element;
+  placement?: "top" | "bottom";
 }
 
 const Toast: FC<ToastProps> = ({
@@ -39,6 +41,8 @@ const Toast: FC<ToastProps> = ({
   successIcon,
   dangerIcon,
   warningIcon,
+
+  placement,
 }) => {
   const containerRef = useRef<View>(null);
   const [animation] = useState(new Animated.Value(0));
@@ -61,32 +65,29 @@ const Toast: FC<ToastProps> = ({
     }
   }, []);
 
-  const renderIcon = () => {
-    if (icon === undefined) {
-      switch (type) {
-        case "success": {
-          if (successIcon) {
-            icon = successIcon;
-          }
-          break;
+  if (icon === undefined) {
+    switch (type) {
+      case "success": {
+        if (successIcon) {
+          icon = successIcon;
         }
+        break;
+      }
 
-        case "danger": {
-          if (dangerIcon) {
-            icon = dangerIcon;
-          }
-          break;
+      case "danger": {
+        if (dangerIcon) {
+          icon = dangerIcon;
         }
-        case "warning": {
-          if (warningIcon) {
-            icon = warningIcon;
-          }
-          break;
+        break;
+      }
+      case "warning": {
+        if (warningIcon) {
+          icon = warningIcon;
         }
+        break;
       }
     }
-    return icon;
-  };
+  }
 
   const animationStyle: Animated.WithAnimatedValue<StyleProp<ViewStyle>> = {
     opacity: animation,
@@ -94,7 +95,7 @@ const Toast: FC<ToastProps> = ({
       {
         translateY: animation.interpolate({
           inputRange: [0, 1],
-          outputRange: [20, 0], // 0 : 150, 0.5 : 75, 1 : 0
+          outputRange: placement === "bottom" ? [20, 0] : [0, 20], // 0 : 150, 0.5 : 75, 1 : 0
         }),
       },
     ],
@@ -121,11 +122,12 @@ const Toast: FC<ToastProps> = ({
       ref={containerRef}
       style={[styles.container, animationStyle, { backgroundColor }, style]}
     >
-      <View style={styles.iconContainer}>{renderIcon()}</View>
-
-      <Animated.Text style={[styles.message, textStyle]}>
-        {message}
-      </Animated.Text>
+      {icon ? <View style={styles.iconContainer}>{icon}</View> : null}
+      {React.isValidElement(message) ? (
+        message
+      ) : (
+        <Text style={[styles.message, textStyle]}>{message}</Text>
+      )}
     </Animated.View>
   );
 };

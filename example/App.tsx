@@ -1,6 +1,6 @@
 import { StatusBar } from "expo-status-bar";
 import React, { useRef, useEffect } from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View, ActivityIndicator } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import Toast from "react-native-fast-toast";
 
@@ -13,7 +13,6 @@ export default function App() {
 
   return (
     <View style={styles.container}>
-      {/* <Text>Open up App.tsx to start working on your app!</Text> */}
       <StatusBar style="auto" />
       <Toast
         ref={toastRef}
@@ -21,6 +20,8 @@ export default function App() {
         successIcon={
           <MaterialCommunityIcons name="check" color="#fff" size={18} />
         }
+        offset={5}
+        // placement="top"
       />
 
       <Text
@@ -79,6 +80,14 @@ export default function App() {
         style={styles.test}
       >
         With Custom Icon
+      </Text>
+      <Text
+        onPress={() => {
+          toast?.show(<ActivityIndicator />);
+        }}
+        style={[styles.test]}
+      >
+        JSX for message
       </Text>
 
       <Text

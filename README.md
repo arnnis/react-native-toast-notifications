@@ -100,7 +100,16 @@ toast.current.show("Task finished successfully", {
 You can customize default options in Toast component
 
 ```js
-<Toast ref={toast} duration={5000} textStyle={{ fontSize: 20 }} />
+<Toast duration={5000} textStyle={{ fontSize: 20 }} />
+```
+
+## Placement
+
+```js
+<Toast
+  placement="bottom | top" // default to bottom
+  offset={50} // distance from bottom or top. ( default to 60 )
+/>
 ```
 
 ## Contributing

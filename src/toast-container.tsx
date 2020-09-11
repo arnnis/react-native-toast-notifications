@@ -1,32 +1,54 @@
 import React, { Component } from "react";
-import { View, StyleSheet, Dimensions } from "react-native";
+import { View, StyleSheet, Dimensions, ViewStyle } from "react-native";
 import Toast, { ToastOptions, ToastProps } from "./toast";
 
 const dims = Dimensions.get("window");
+
+interface Props extends ToastOptions {
+  offset?: number;
+  placement: "top" | "bottom";
+}
 
 interface State {
   toasts: Array<ToastProps>;
 }
 
-class ToastContainer extends Component<ToastOptions, State> {
-  constructor(props: ToastOptions) {
+class ToastContainer extends Component<Props, State> {
+  constructor(props: Props) {
     super(props);
     this.state = {
       toasts: [],
     };
   }
 
-  show = (message: string, toastOptions?: ToastOptions) => {
+  static defaultProps = {
+    placement: "bottom",
+    offset: 60,
+  };
+
+  show = (message: string | JSX.Element, toastOptions?: ToastOptions) => {
     let id = Math.random().toString();
     const onClose = () => this.hide(id);
     this.setState({ toasts: this.state.toasts.filter((t) => t.id !== id) });
     this.setState({
-      toasts: [{ id, onClose, message, ...toastOptions }, ...this.state.toasts],
+      toasts: [
+        {
+          id,
+          onClose,
+          message,
+          ...toastOptions,
+        },
+        ...this.state.toasts,
+      ],
     });
     return id;
   };
 
-  update = (id: string, message: string, toastOptions?: ToastOptions) => {
+  update = (
+    id: string,
+    message: string | JSX.Element,
+    toastOptions?: ToastOptions
+  ) => {
     this.setState({
       toasts: this.state.toasts.map((toast) =>
         toast.id === id ? { ...toast, message, ...toastOptions } : toast
@@ -40,8 +62,17 @@ class ToastContainer extends Component<ToastOptions, State> {
 
   render() {
     const { toasts } = this.state;
+    let { placement, offset } = this.props;
+
+    let style: ViewStyle = {
+      bottom: placement === "bottom" ? offset : undefined,
+      top: placement === "top" ? offset : undefined,
+      justifyContent: placement === "bottom" ? "flex-end" : "flex-start",
+      flexDirection: placement === "bottom" ? "column" : "column-reverse",
+    };
+
     return (
-      <View style={styles.container} pointerEvents="none">
+      <View style={[styles.container, style]} pointerEvents="none">
         {toasts.map((toast) => (
           <Toast key={toast.id} {...this.props} {...toast} />
         ))}
