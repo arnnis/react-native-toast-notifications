@@ -29,18 +29,22 @@ class ToastContainer extends Component<Props, State> {
   show = (message: string | JSX.Element, toastOptions?: ToastOptions) => {
     let id = Math.random().toString();
     const onClose = () => this.hide(id);
-    this.setState({ toasts: this.state.toasts.filter((t) => t.id !== id) });
-    this.setState({
-      toasts: [
-        {
-          id,
-          onClose,
-          message,
-          ...toastOptions,
-        },
-        ...this.state.toasts,
-      ],
+
+    requestAnimationFrame(() => {
+      this.setState({ toasts: this.state.toasts.filter((t) => t.id !== id) });
+      this.setState({
+        toasts: [
+          {
+            id,
+            onClose,
+            message,
+            ...toastOptions,
+          },
+          ...this.state.toasts,
+        ],
+      });
     });
+
     return id;
   };
 
