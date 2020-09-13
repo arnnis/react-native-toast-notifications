@@ -114,6 +114,16 @@ export default function App() {
       >
         Global toast call
       </Text>
+
+      <Text
+        onPress={() => {
+          toast?.show("Toast 1");
+          toast?.show("Toast 2");
+        }}
+        style={[styles.test, { marginTop: 30 }]}
+      >
+        Two toast at same time
+      </Text>
     </View>
   );
 }
