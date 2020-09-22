@@ -112,8 +112,17 @@ You can customize default options in Toast component
 />
 ```
 
+## Donation
+If this project helped you reduce time to develop, you can give me a cup of coffee :)
+
+[![paypal](https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif)](https://www.paypal.com/paypalme2/arnnis)
+
 ## Contributing
 
 Pull request are welcome.
 
 While developing, you can run the [example app](/example) to test your changes.
+
+
+## License
+MIT
