@@ -124,6 +124,18 @@ export default function App() {
       >
         Two toast at same time
       </Text>
+
+      <Text
+        onPress={() => {
+          toast?.show("Press to close", {
+            duration: 10000,
+            onPress: (id) => toast?.hide(id),
+          });
+        }}
+        style={[styles.test, { marginTop: 30 }]}
+      >
+        Toast onPress & close on press
+      </Text>
     </View>
   );
 }
