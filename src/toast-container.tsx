@@ -76,7 +76,7 @@ class ToastContainer extends Component<Props, State> {
     };
 
     return (
-      <View style={[styles.container, style]} pointerEvents="none">
+      <View style={[styles.container, style]} pointerEvents="box-none">
         {toasts.map((toast) => (
           <Toast key={toast.id} {...this.props} {...toast} />
         ))}

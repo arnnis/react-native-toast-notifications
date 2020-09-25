@@ -7,6 +7,7 @@ import {
   ViewStyle,
   TextStyle,
   Text,
+  TouchableWithoutFeedback,
 } from "react-native";
 
 export interface ToastOptions {
@@ -19,11 +20,17 @@ export interface ToastOptions {
   successIcon?: JSX.Element;
   dangerIcon?: JSX.Element;
   warningIcon?: JSX.Element;
+
+  successColor?: string;
+  dangerColor?: string;
+  warningColor?: string;
+
+  onPress?(id: string): void;
 }
 
 export interface ToastProps extends ToastOptions {
   id: string;
-  onClose(id: string): void;
+  onClose(): void;
   message: string | JSX.Element;
   placement?: "top" | "bottom";
 }
@@ -42,7 +49,13 @@ const Toast: FC<ToastProps> = ({
   dangerIcon,
   warningIcon,
 
+  successColor,
+  dangerColor,
+  warningColor,
+
   placement,
+
+  onPress,
 }) => {
   const containerRef = useRef<View>(null);
   const [animation] = useState(new Animated.Value(0));
@@ -54,15 +67,21 @@ const Toast: FC<ToastProps> = ({
       duration: 250,
     }).start();
 
-    if (duration !== undefined && typeof duration === "number") {
-      setTimeout(() => {
+    let closeTimeout: NodeJS.Timeout | null = null;
+
+    if (duration !== 0 && typeof duration === "number") {
+      closeTimeout = setTimeout(() => {
         Animated.timing(animation, {
           toValue: 0,
           useNativeDriver: true,
           duration: 250,
-        }).start(() => onClose(id));
+        }).start(() => onClose());
       }, duration);
     }
+
+    return () => {
+      closeTimeout && clearTimeout(closeTimeout);
+    };
   }, []);
 
   if (icon === undefined) {
@@ -99,25 +118,21 @@ const Toast: FC<ToastProps> = ({
         }),
       },
     ],
-    // height: hideAnimation.interpolate({
-    //   inputRange: [0, 1],
-    //   outputRange: [0, 40],
-    // }),
   };
 
   let backgroundColor = "#333";
   switch (type) {
     case "success":
-      backgroundColor = "#00C851";
+      backgroundColor = successColor || "#00C851";
       break;
     case "danger":
-      backgroundColor = "#ff4444";
+      backgroundColor = dangerColor || "#ff4444";
       break;
     case "warning":
-      backgroundColor = "#ffbb33";
+      backgroundColor = warningColor || "#ffbb33";
   }
 
-  return (
+  const renderToast = () => (
     <Animated.View
       ref={containerRef}
       style={[styles.container, animationStyle, { backgroundColor }, style]}
@@ -129,6 +144,14 @@ const Toast: FC<ToastProps> = ({
         <Text style={[styles.message, textStyle]}>{message}</Text>
       )}
     </Animated.View>
+  );
+
+  return onPress ? (
+    <TouchableWithoutFeedback onPress={() => onPress(id)}>
+      {renderToast()}
+    </TouchableWithoutFeedback>
+  ) : (
+    renderToast()
   );
 };
 
