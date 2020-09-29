@@ -123,7 +123,13 @@ toast.show("Task finished successfully", {
 You can customize default options in Toast component
 
 ```js
-<Toast duration={5000} textStyle={{ fontSize: 20 }} />
+<Toast 
+  duration={5000} 
+  textStyle={{ fontSize: 20 }}
+  successColor="green"
+  dangerColor="red"
+  warningColor="orange"
+/>
 ```
 
 ## Placement
