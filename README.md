@@ -62,16 +62,39 @@ now you can call `toast.show()` everywhere on app. like alert.
 
 Check [index.d.ts](/example/index.d.ts) in example app for typescript.
 
+## Hook Example
+Alternatively you can use hooks to call toasts, to do so, wrap `ToastProvier` to your root component (index.js or App.js)
+```js
+import { ToastProvider } from 'react-native-fast-toast'
+
+export default function App() {
+  return (
+    <ToastProvider>
+      <RestOfYourApp />
+    <ToastProvider/>
+  );
+}
+```
+
+Then use hook like this everywhere:
+```js
+import { useToast } from 'react-native-fast-toast'
+
+const Component = () => {
+  const toast = useToast()
+}
+```
+
 ## Type Example
 
 ```js
-toast.current.show("Task finished successfully", { type: "success" });
+toast.show("Task finished successfully", { type: "success" });
 ```
 
 ## Icon Example
 
 ```js
-toast.current.show("Task finished successfully", { icon: <Icon /> });
+toast.show("Task finished successfully", { icon: <Icon /> });
 ```
 
 or
@@ -90,7 +113,7 @@ or
 ## Customize
 
 ```js
-toast.current.show("Task finished successfully", {
+toast.show("Task finished successfully", {
   duration: 5000,
   style: { padding: 0 },
   textStyle: { fontSize: 20 },
