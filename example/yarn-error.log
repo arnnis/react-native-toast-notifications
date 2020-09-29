@@ -1,5 +1,5 @@
 Arguments: 
-  /usr/local/Cellar/node/14.0.0/bin/node /usr/local/Cellar/yarn/1.22.4/libexec/bin/yarn.js add -D @types/dom
+  /usr/local/Cellar/node/14.0.0/bin/node /usr/local/Cellar/yarn/1.22.4/libexec/bin/yarn.js add reacr-native-fast-toast
 
 PATH: 
   /usr/local/opt/qt/bin:/usr/local/opt/icu4c/sbin:/usr/local/opt/icu4c/bin:/usr/local/opt/node@12/bin:/Library/Frameworks/Python.framework/Versions/3.8/bin:/Users/alirezarzna/.cargo/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin:/Library/Apple/usr/bin:/usr/local/opt/qt/bin:/usr/local/opt/icu4c/sbin:/usr/local/opt/icu4c/bin:/usr/local/opt/node@12/bin:/Library/Frameworks/Python.framework/Versions/3.8/bin:/Users/alirezarzna/.cargo/bin:/usr/local/Caskroom/android-sdk/4333796/platform-tools:/usr/local/Caskroom/android-sdk/4333796/platform-tools
@@ -14,7 +14,7 @@ Platform:
   darwin x64
 
 Trace: 
-  Error: https://registry.yarnpkg.com/@types%2fdom: Not found
+  Error: https://registry.yarnpkg.com/reacr-native-fast-toast: Not found
       at Request.params.callback [as _callback] (/usr/local/Cellar/yarn/1.22.4/libexec/lib/cli.js:66987:18)
       at Request.self.callback (/usr/local/Cellar/yarn/1.22.4/libexec/lib/cli.js:140748:22)
       at Request.emit (events.js:315:20)
@@ -42,11 +42,12 @@ npm manifest:
       "react": "~16.11.0",
       "react-dom": "~16.11.0",
       "react-native": "https://github.com/expo/react-native/archive/sdk-38.0.2.tar.gz",
-      "react-native-fast-toast": "^1.0.4",
+      "react-native-fast-toast": "^1.0.9",
       "react-native-web": "~0.11.7"
     },
     "devDependencies": {
       "@babel/core": "^7.8.6",
+      "@types/node": "^14.6.4",
       "@types/react": "~16.9.41",
       "@types/react-native": "~0.62.13",
       "typescript": "~3.9.5"
@@ -1294,6 +1295,11 @@ Lockfile:
     dependencies:
       "@types/istanbul-lib-coverage" "*"
       "@types/istanbul-lib-report" "*"
+  
+  "@types/node@^14.6.4":
+    version "14.6.4"
+    resolved "https://registry.yarnpkg.com/@types/node/-/node-14.6.4.tgz#a145cc0bb14ef9c4777361b7bbafa5cf8e3acb5a"
+    integrity sha512-Wk7nG1JSaMfMpoMJDKUsWYugliB2Vy55pdjLpmLixeyMi7HizW2I/9QoxsPCkXl3dO+ZOVqPumKaDUv5zJu2uQ==
   
   "@types/prop-types@*":
     version "15.7.3"
@@ -4452,10 +4458,10 @@ Lockfile:
       invariant "^2.2.4"
       use-subscription "^1.0.0"
   
-  react-native-fast-toast@^1.0.4:
-    version "1.0.4"
-    resolved "https://registry.yarnpkg.com/react-native-fast-toast/-/react-native-fast-toast-1.0.4.tgz#29364beb4e80650f10d84ee223c923773bede24f"
-    integrity sha512-NAcC6zVJtX6t1v51G8vpG9brpGjjCHYjXav74/J55eMZ55FQfoPPH87rOkE+ANooMT9B2Ay1bb/cDNqVb4i/yg==
+  react-native-fast-toast@^1.0.9:
+    version "1.0.9"
+    resolved "https://registry.yarnpkg.com/react-native-fast-toast/-/react-native-fast-toast-1.0.9.tgz#9f39aea347d3faa1230c48ca44fb5e5d549c4ecf"
+    integrity sha512-HMHmYw5oM6vpfpcgufiX3lF4nJsMgEJx3Ao46DqfHfDeptUu7RmfWhEF5X8SAkXOFCm6zh1BLK1LXKmLz0kUOw==
   
   react-native-safe-area-context@~3.0.7:
     version "3.0.7"
