@@ -4,7 +4,7 @@ import Toast, { ToastOptions, ToastProps } from "./toast";
 
 const dims = Dimensions.get("window");
 
-interface Props extends ToastOptions {
+export interface Props extends ToastOptions {
   offset?: number;
   placement: "top" | "bottom";
 }

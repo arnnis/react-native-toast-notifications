@@ -1,8 +1,8 @@
 import React, { FC, useEffect, useRef, useState } from "react";
 import ToastContext from "./context";
-import Toast from "../toast-container";
+import Toast, { Props } from "../toast-container";
 
-const ToastProvider: FC = ({ children }) => {
+const ToastProvider: FC<Props> = ({ children, ...props }) => {
   const toastRef = useRef(null);
   const [refState, setRefState] = useState(null);
 
@@ -13,7 +13,7 @@ const ToastProvider: FC = ({ children }) => {
   return (
     <ToastContext.Provider value={refState}>
       {children}
-      <Toast ref={toastRef} />
+      <Toast ref={toastRef} {...props} />
     </ToastContext.Provider>
   );
 };
