@@ -1,19 +1,20 @@
 import { StatusBar } from "expo-status-bar";
 import React, { useRef, useEffect } from "react";
-import { StyleSheet, Text, View, ActivityIndicator } from "react-native";
+import { StyleSheet, Text, View, ActivityIndicator, TextInput } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import HookExample from "./hook-example";
 import Toast, { ToastProvider } from "react-native-fast-toast";
 
 export default function App() {
   const toastRef = useRef<Toast>(null);
+  const inputRef = useRef<TextInput>(null);
 
   useEffect(() => {
     global["toast"] = toastRef.current;
   }, []);
 
   return (
-    <ToastProvider placement="top">
+    <ToastProvider placement="bottom">
       <View style={styles.container}>
         <StatusBar style="auto" />
         <Toast
@@ -22,8 +23,6 @@ export default function App() {
           successIcon={
             <MaterialCommunityIcons name="check" color="#fff" size={18} />
           }
-          offset={5}
-          // placement="top"
         />
 
         <Text
@@ -139,6 +138,16 @@ export default function App() {
           style={[styles.test, { marginTop: 30 }]}
         >
           Toast onPress & close on press
+        </Text>
+        <TextInput ref={inputRef} style={{height: 50}}></TextInput>
+        <Text
+          onPress={() => {
+            inputRef.current?.focus();
+            toast?.show("Hi!");
+          }}
+          style={[styles.test, { marginTop: 30 }]}
+        >
+          Toast avoids keyboard
         </Text>
         <HookExample />
       </View>
