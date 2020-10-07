@@ -13,7 +13,7 @@ export default function App() {
   }, []);
 
   return (
-    <ToastProvider>
+    <ToastProvider placement="top">
       <View style={styles.container}>
         <StatusBar style="auto" />
         <Toast
