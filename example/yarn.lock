@@ -4397,10 +4397,8 @@ react-native-appearance@~0.3.3:
     invariant "^2.2.4"
     use-subscription "^1.0.0"
 
-react-native-fast-toast@^1.1.2:
+"react-native-fast-toast@file:..":
   version "1.1.2"
-  resolved "https://registry.yarnpkg.com/react-native-fast-toast/-/react-native-fast-toast-1.1.2.tgz#fdabb57c8b6eaf51204642679c57e3ed94342c94"
-  integrity sha512-UEk66fy03z+HuQPa1zS1+jXa0gnsv/F+tU3ZaDDurebU1DzBefxolZ/1dd8sYAuvbTbgpSxzc1bHYeFuerGuPQ==
 
 react-native-safe-area-context@~3.0.7:
   version "3.0.7"
