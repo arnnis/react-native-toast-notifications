@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { View, StyleSheet, Dimensions, ViewStyle, KeyboardAvoidingView, Platform } from "react-native";
+import { StyleSheet, Dimensions, ViewStyle, KeyboardAvoidingView, Platform } from "react-native";
 import Toast, { ToastOptions, ToastProps } from "./toast";
 
 const dims = Dimensions.get("window");

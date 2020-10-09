@@ -67,7 +67,7 @@ const Toast: FC<ToastProps> = ({
       duration: 250,
     }).start();
 
-    let closeTimeout: NodeJS.Timeout | null = null;
+    let closeTimeout: ReturnType<typeof setTimeout> = null;
 
     if (duration !== 0 && typeof duration === "number") {
       closeTimeout = setTimeout(() => {
@@ -107,7 +107,7 @@ const Toast: FC<ToastProps> = ({
       }
     }
   }
-
+  // @ts-ignore
   const animationStyle: Animated.WithAnimatedValue<StyleProp<ViewStyle>> = {
     opacity: animation,
     transform: [
