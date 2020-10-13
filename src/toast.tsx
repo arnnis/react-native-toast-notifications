@@ -108,7 +108,7 @@ const Toast: FC<ToastProps> = ({
     }
   }
 
-  const animationStyle: Animated.WithAnimatedValue<StyleProp<ViewStyle>> = {
+  const animationStyle = {
     opacity: animation,
     transform: [
       {

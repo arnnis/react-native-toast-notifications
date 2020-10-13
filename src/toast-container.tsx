@@ -1,5 +1,11 @@
 import React, { Component } from "react";
-import { View, StyleSheet, Dimensions, ViewStyle, KeyboardAvoidingView, Platform } from "react-native";
+import {
+  StyleSheet,
+  Dimensions,
+  ViewStyle,
+  KeyboardAvoidingView,
+  Platform,
+} from "react-native";
 import Toast, { ToastOptions, ToastProps } from "./toast";
 
 const dims = Dimensions.get("window");
@@ -77,9 +83,10 @@ class ToastContainer extends Component<Props, State> {
 
     return (
       <KeyboardAvoidingView
-        behavior={Platform.OS === 'ios' ? 'position' : undefined}
+        behavior={Platform.OS === "ios" ? "position" : undefined}
         style={[styles.container, style]}
-        pointerEvents="box-none">
+        pointerEvents="box-none"
+      >
         {toasts.map((toast) => (
           <Toast key={toast.id} {...this.props} {...toast} />
         ))}
