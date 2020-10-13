@@ -1,14 +1,41 @@
 {
   "name": "react-native-fast-toast",
-  "version": "2.0.0",
-  "main": "index.ts",
+  "version": "2.1.2",
+  "main": "lib/commonjs/index.js",
+  "module": "lib/module/index.js",
+  "types": "lib/typescript/index.d.ts",
+  "react-native": "lib/module/index.js",
+  "files": [
+    "src",
+    "lib"
+  ],
   "license": "MIT",
   "author": {
     "name": "Alireza Rezania",
     "email": "alireza.rzna@gmail.com"
   },
+  "homepage": "https://github.com/arnnis/react-native-fast-toast#readme",
   "devDependencies": {
+    "@react-native-community/bob": "^0.16.2",
     "@types/react": "^16.9.49",
-    "@types/react-native": "^0.63.15"
+    "@types/react-native": "^0.63.15",
+    "typescript": "^4.0.3"
+  },
+  "scripts": {
+    "prepare": "bob build"
+  },
+  "@react-native-community/bob": {
+    "source": "src",
+    "output": "lib",
+    "targets": [
+      [
+        "commonjs",
+        {
+          "copyFlow": true
+        }
+      ],
+      "module",
+      "typescript"
+    ]
   }
 }
