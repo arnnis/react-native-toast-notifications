@@ -11,6 +11,7 @@ import {
 } from "react-native";
 
 export interface ToastOptions {
+  id?: string;
   icon?: JSX.Element;
   type?: "normal" | "success" | "danger" | "warning";
   duration?: number;

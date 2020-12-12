@@ -1,6 +1,6 @@
 {
   "name": "react-native-fast-toast",
-  "version": "2.1.3",
+  "version": "2.1.4",
   "main": "lib/commonjs/index.js",
   "module": "lib/module/index.js",
   "types": "lib/typescript/index.d.ts",
