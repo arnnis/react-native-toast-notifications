@@ -60,7 +60,7 @@ export default function App() {
 
 now you can call `toast.show()` everywhere on app. like alert.
 
-Check [index.d.ts](/example/index.d.ts) in example app for typescript.
+TypeScript Note: add [index.d.ts](/example/index.d.ts) to your project root.
 
 ## Hook Example
 Alternatively you can use hooks to call toasts, to do so, wrap `ToastProvier` to your root component (index.js or App.js)
