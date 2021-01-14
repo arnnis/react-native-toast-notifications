@@ -1,3 +1,6 @@
+<a href="https://www.npmjs.com/package/react-native-fast-toast"><img src="https://img.shields.io/npm/v/react-native-fast-toast/latest.svg?style=flat-square" alt="NPM latest version"></a>
+<a href="https://github.com/arnnis/react-native-fast-toast/blob/master/LICENSE"><img src="https://img.shields.io/static/v1?label=License&message=MIT&color=success&style=flat-square" alt="License MIT"></a>
+
 # react-native-fast-toast
 
 A Toast component for react-native, supports Android, IOS, Web, Windows
