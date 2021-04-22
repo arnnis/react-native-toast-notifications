@@ -25,6 +25,7 @@ export interface ToastOptions {
   successColor?: string;
   dangerColor?: string;
   warningColor?: string;
+  normalColor?: string;
 
   onPress?(id: string): void;
 }
@@ -53,6 +54,7 @@ const Toast: FC<ToastProps> = ({
   successColor,
   dangerColor,
   warningColor,
+  normalColor,
 
   placement,
 
@@ -121,7 +123,7 @@ const Toast: FC<ToastProps> = ({
     ],
   };
 
-  let backgroundColor = "#333";
+  let backgroundColor = "";
   switch (type) {
     case "success":
       backgroundColor = successColor || "#00C851";
@@ -131,6 +133,9 @@ const Toast: FC<ToastProps> = ({
       break;
     case "warning":
       backgroundColor = warningColor || "#ffbb33";
+      break;
+    default:
+      backgroundColor = normalColor || "#333";
   }
 
   const renderToast = () => (
