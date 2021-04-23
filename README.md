@@ -132,6 +132,7 @@ You can customize default options in Toast component
   successColor="green"
   dangerColor="red"
   warningColor="orange"
+  normalColor="gray"
 />
 ```
 
