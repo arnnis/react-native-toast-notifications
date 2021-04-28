@@ -17,7 +17,7 @@
   "homepage": "https://github.com/arnnis/react-native-fast-toast#readme",
   "devDependencies": {
     "@react-native-community/bob": "^0.16.2",
-    "@types/react": "^16.9.49",
+    "@types/react": "^17.0.4",
     "@types/react-native": "^0.63.52",
     "typescript": "^4.0.3"
   },
