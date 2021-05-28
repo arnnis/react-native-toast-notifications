@@ -29,7 +29,9 @@ export interface ToastOptions {
 
   onPress?(id: string): void;
 
-  changeAnimationStyle?(animationValue: Animated.Value): ViewStyle;
+  changeAnimationStyle?(
+    animationValue: Animated.Value
+  ): Animated.AnimatedProps<ViewStyle>;
 }
 
 export interface ToastProps extends ToastOptions {
