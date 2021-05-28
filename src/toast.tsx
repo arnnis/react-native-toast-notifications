@@ -28,6 +28,8 @@ export interface ToastOptions {
   normalColor?: string;
 
   onPress?(id: string): void;
+
+  changeAnimationStyle?(animationValue: Animated.Value): ViewStyle;
 }
 
 export interface ToastProps extends ToastOptions {
@@ -55,6 +57,8 @@ const Toast: FC<ToastProps> = ({
   dangerColor,
   warningColor,
   normalColor,
+
+  changeAnimationStyle,
 
   placement,
 
@@ -111,17 +115,19 @@ const Toast: FC<ToastProps> = ({
     }
   }
 
-  const animationStyle = {
-    opacity: animation,
-    transform: [
-      {
-        translateY: animation.interpolate({
-          inputRange: [0, 1],
-          outputRange: placement === "bottom" ? [20, 0] : [0, 20], // 0 : 150, 0.5 : 75, 1 : 0
-        }),
-      },
-    ],
-  };
+  const animationStyle = changeAnimationStyle
+    ? changeAnimationStyle(animation)
+    : {
+        opacity: animation,
+        transform: [
+          {
+            translateY: animation.interpolate({
+              inputRange: [0, 1],
+              outputRange: placement === "bottom" ? [20, 0] : [0, 20], // 0 : 150, 0.5 : 75, 1 : 0
+            }),
+          },
+        ],
+      };
 
   let backgroundColor = "";
   switch (type) {
