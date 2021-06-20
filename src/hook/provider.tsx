@@ -4,14 +4,14 @@ import Toast, { Props } from "../toast-container";
 
 const ToastProvider: FC<Props> = ({ children, ...props }) => {
   const toastRef = useRef(null);
-  const [refState, setRefState] = useState(null);
+  const [refState, setRefState] = useState({});
 
   useEffect(() => {
-    setRefState(toastRef.current);
+    setRefState(toastRef.current as any);
   }, []);
 
   return (
-    <ToastContext.Provider value={refState}>
+    <ToastContext.Provider value={refState as any}>
       {children}
       <Toast ref={toastRef} {...props} />
     </ToastContext.Provider>
