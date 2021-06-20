@@ -1,9 +1,7 @@
-type Toast = React.RefObject<
-  import("react-native-fast-toast").default
->["current"];
+type ToastType = import("react-native-fast-toast").ToastType
 
 declare global {
-  const toast: Toast;
+  const toast: ToastType;
 }
 
-declare var toast: Toast;
+declare var toast: ToastType;
