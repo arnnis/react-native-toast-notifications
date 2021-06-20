@@ -45,9 +45,32 @@ export default function App() {
   );
 ```
 
+## Hook Example
+You can use hooks to call toasts everywhere, to do so, wrap `ToastProvier` to your root component (index.js or App.js)
+```js
+import { ToastProvider } from 'react-native-fast-toast'
+
+export default function App() {
+  return (
+    <ToastProvider>
+      <RestOfYourApp />
+    <ToastProvider/>
+  );
+}
+```
+
+Then use hook like this everywhere in your app:
+```js
+import { useToast } from 'react-native-fast-toast'
+
+const Component = () => {
+  const toast = useToast()
+}
+```
+
 ## Global Example
 
-If you want to have one Toast and use it everywhere on your app. do this in root component of your app (index.js or App.js)
+Alternatively, To call toasts everywhere (even outside of React components like in redux actions), do this in root component of your app (index.js or App.js)
 
 ```js
 import Toast from "react-native-fast-toast";
@@ -61,32 +84,9 @@ export default function App() {
   );
 ```
 
-now you can call `toast.show()` everywhere on app. like alert.
+Now you can call `toast.show()` everywhere on app. like alert.
 
 TypeScript Note: add [index.d.ts](/example/index.d.ts) to your project root.
-
-## Hook Example
-Alternatively you can use hooks to call toasts, to do so, wrap `ToastProvier` to your root component (index.js or App.js)
-```js
-import { ToastProvider } from 'react-native-fast-toast'
-
-export default function App() {
-  return (
-    <ToastProvider>
-      <RestOfYourApp />
-    <ToastProvider/>
-  );
-}
-```
-
-Then use hook like this everywhere:
-```js
-import { useToast } from 'react-native-fast-toast'
-
-const Component = () => {
-  const toast = useToast()
-}
-```
 
 ## Type Example
 
@@ -145,16 +145,20 @@ You can customize default options in Toast component
 />
 ```
 
-## Donation
-If this project helped you reduce time to develop, you can buy me a cup of coffee :)
-
-<a href="https://www.buymeacoffee.com/arnnis" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/default-red.png" alt="Buy Me A Coffee" height="50" ></a>
-
 ## Contributing
 
 Pull request are welcome.
 
 While developing, you can run the [example app](/example) to test your changes.
+
+## Donation
+If this project helped you reduce time to develop, you can buy me a cup of coffee :)
+
+<a href="https://www.buymeacoffee.com/arnnis" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/default-red.png" alt="Buy Me A Coffee" height="50" ></a>
+
+## Hire
+
+Looking for a React/React-Native Expert? Email at alirezarzna@gmail.com
 
 
 ## License
