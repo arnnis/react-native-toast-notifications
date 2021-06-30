@@ -1,6 +1,12 @@
 import { StatusBar } from "expo-status-bar";
 import React, { useRef, useEffect } from "react";
-import { StyleSheet, Text, View, ActivityIndicator, TextInput } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  View,
+  ActivityIndicator,
+  TextInput,
+} from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import HookExample from "./hook-example";
 import Toast, { ToastProvider } from "react-native-fast-toast";
@@ -10,7 +16,7 @@ export default function App() {
   const inputRef = useRef<TextInput>(null);
 
   useEffect(() => {
-    global["toast"] = toastRef.current;
+    global["toast"] = toastRef.current as ToastType;
   }, []);
 
   return (
@@ -26,7 +32,9 @@ export default function App() {
         />
 
         <Text
-          onPress={() => toastRef.current?.show("This is a toast!")}
+          onPress={() =>
+            toastRef.current?.show("This is a toast!", { duration: 15000 })
+          }
           style={styles.test}
         >
           Normal
@@ -139,7 +147,7 @@ export default function App() {
         >
           Toast onPress & close on press
         </Text>
-        <TextInput ref={inputRef} style={{height: 50}}></TextInput>
+        <TextInput ref={inputRef} style={{ height: 50 }}></TextInput>
         <Text
           onPress={() => {
             inputRef.current?.focus();

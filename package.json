@@ -4,7 +4,7 @@
   "main": "lib/commonjs/index.js",
   "module": "lib/module/index.js",
   "types": "lib/typescript/index.d.ts",
-  "react-native": "lib/module/index.js",
+  "react-native": "src/index.ts",
   "files": [
     "src",
     "lib"
@@ -15,6 +15,10 @@
     "email": "alireza.rzna@gmail.com"
   },
   "homepage": "https://github.com/arnnis/react-native-fast-toast#readme",
+  "peerDependencies": {
+    "react": "*",
+    "react-native": "*"
+  },
   "devDependencies": {
     "@react-native-community/bob": "^0.16.2",
     "@types/react": "^16.9.49",

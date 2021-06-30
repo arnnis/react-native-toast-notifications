@@ -8,7 +8,14 @@ import {
   TextStyle,
   Text,
   TouchableWithoutFeedback,
+  PanResponder,
+  PanResponderInstance,
+  Dimensions,
+  Platform,
+  PanResponderGestureState,
 } from "react-native";
+
+const dims = Dimensions.get("window");
 
 export interface ToastOptions {
   id?: string;
@@ -43,7 +50,7 @@ const Toast: FC<ToastProps> = ({
   icon,
   type = "normal",
   message,
-  duration = 3000,
+  duration = 5000,
   style,
   textStyle,
 
@@ -62,6 +69,8 @@ const Toast: FC<ToastProps> = ({
 }) => {
   const containerRef = useRef<View>(null);
   const [animation] = useState(new Animated.Value(0));
+  const panResponderRef = useRef<PanResponderInstance>();
+  const panResponderAnimRef = useRef<Animated.ValueXY>();
 
   useEffect(() => {
     Animated.timing(animation, {
@@ -87,6 +96,55 @@ const Toast: FC<ToastProps> = ({
     };
   }, []);
 
+  const panReleaseToLeft = (gestureState: PanResponderGestureState) => {
+    Animated.timing(getPanResponderAnim(), {
+      toValue: { x: (-dims.width / 10) * 9, y: gestureState.dy },
+      useNativeDriver: true,
+      duration: 250,
+    }).start(() => onClose());
+  };
+
+  const panReleaseToRight = (gestureState: PanResponderGestureState) => {
+    Animated.timing(getPanResponderAnim(), {
+      toValue: { x: (dims.width / 10) * 9, y: gestureState.dy },
+      useNativeDriver: true,
+      duration: 250,
+    }).start(() => onClose());
+  };
+
+  const getPanResponder = () => {
+    if (panResponderRef.current) return panResponderRef.current;
+    panResponderRef.current = PanResponder.create({
+      onStartShouldSetPanResponder: () => true,
+      onPanResponderMove: (_, gestureState) => {
+        getPanResponderAnim()?.setValue({
+          x: gestureState.dx,
+          y: gestureState.dy,
+        });
+      },
+      onPanResponderRelease: (_, gestureState) => {
+        console.log("gesture release:", gestureState);
+        if (gestureState.dx > 50) {
+          panReleaseToRight(gestureState);
+        } else if (gestureState.dx < -50) {
+          panReleaseToLeft(gestureState);
+        } else {
+          Animated.spring(getPanResponderAnim(), {
+            toValue: { x: 0, y: 0 },
+            useNativeDriver: true,
+          }).start();
+        }
+      },
+    });
+    return panResponderRef.current;
+  };
+
+  const getPanResponderAnim = () => {
+    if (panResponderAnimRef.current) return panResponderAnimRef.current;
+    panResponderAnimRef.current = new Animated.ValueXY({ x: 0, y: 0 });
+    return panResponderAnimRef.current;
+  };
+
   if (icon === undefined) {
     switch (type) {
       case "success": {
@@ -111,7 +169,7 @@ const Toast: FC<ToastProps> = ({
     }
   }
 
-  const animationStyle = {
+  const animationStyle: Animated.WithAnimatedObject<ViewStyle> = {
     opacity: animation,
     transform: [
       {
@@ -120,6 +178,7 @@ const Toast: FC<ToastProps> = ({
           outputRange: placement === "bottom" ? [20, 0] : [0, 20], // 0 : 150, 0.5 : 75, 1 : 0
         }),
       },
+      getPanResponderAnim().getTranslateTransform()[0],
     ],
   };
 
@@ -141,6 +200,7 @@ const Toast: FC<ToastProps> = ({
   const renderToast = () => (
     <Animated.View
       ref={containerRef}
+      {...getPanResponder().panHandlers}
       style={[styles.container, animationStyle, { backgroundColor }, style]}
     >
       {icon ? <View style={styles.iconContainer}>{icon}</View> : null}
@@ -169,6 +229,8 @@ const styles = StyleSheet.create({
     marginVertical: 5,
     flexDirection: "row",
     alignItems: "center",
+    maxWidth: (dims.width / 10) * 9,
+    ...(Platform.OS === "web" ? { cursor: "pointer" } : null),
   },
   message: {
     color: "#fff",

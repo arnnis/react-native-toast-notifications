@@ -99,14 +99,17 @@ const styles = StyleSheet.create({
   container: {
     flex: 0,
     position: "absolute",
-    maxWidth: dims.width * 10 * 9,
+    width: dims.width,
+    maxWidth: dims.width,
+    overflow: "hidden",
     bottom: 100,
+
     justifyContent: "flex-end",
     alignItems: "center",
     borderRadius: 5,
     zIndex: 999,
-    left: "10%",
-    right: "10%",
+    left: 0,
+    right: 0,
   },
   message: {
     color: "#333",
