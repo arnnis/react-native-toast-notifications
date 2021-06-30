@@ -22,6 +22,7 @@ export interface ToastOptions {
   icon?: JSX.Element;
   type?: "normal" | "success" | "danger" | "warning";
   duration?: number;
+  placement?: "top" | "bottom";
   style?: StyleProp<ViewStyle>;
   textStyle?: StyleProp<TextStyle>;
 
@@ -41,7 +42,6 @@ export interface ToastProps extends ToastOptions {
   id: string;
   onClose(): void;
   message: string | JSX.Element;
-  placement?: "top" | "bottom";
 }
 
 const Toast: FC<ToastProps> = ({

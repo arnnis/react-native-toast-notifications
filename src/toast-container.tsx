@@ -12,7 +12,6 @@ const dims = Dimensions.get("window");
 
 export interface Props extends ToastOptions {
   offset?: number;
-  placement: "top" | "bottom";
 }
 
 interface State {
@@ -70,27 +69,58 @@ class ToastContainer extends Component<Props, State> {
     this.setState({ toasts: this.state.toasts.filter((t) => t.id !== id) });
   };
 
-  render() {
+  renderBottomToasts() {
     const { toasts } = this.state;
-    let { placement, offset } = this.props;
-
+    let { offset } = this.props;
     let style: ViewStyle = {
-      bottom: placement === "bottom" ? offset : undefined,
-      top: placement === "top" ? offset : undefined,
-      justifyContent: placement === "bottom" ? "flex-end" : "flex-start",
-      flexDirection: placement === "bottom" ? "column" : "column-reverse",
+      bottom: offset,
+      justifyContent: "flex-end",
+      flexDirection: "column",
     };
-
     return (
       <KeyboardAvoidingView
         behavior={Platform.OS === "ios" ? "position" : undefined}
         style={[styles.container, style]}
         pointerEvents="box-none"
       >
-        {toasts.map((toast) => (
-          <Toast key={toast.id} {...this.props} {...toast} />
-        ))}
+        {toasts
+          .filter((t) => !t.placement || t.placement === "bottom")
+          .map((toast) => (
+            <Toast key={toast.id} {...this.props} {...toast} />
+          ))}
       </KeyboardAvoidingView>
+    );
+  }
+
+  renderTopToasts() {
+    const { toasts } = this.state;
+    let { offset } = this.props;
+    let style: ViewStyle = {
+      top: offset,
+      justifyContent: "flex-start",
+      flexDirection: "column",
+    };
+    return (
+      <KeyboardAvoidingView
+        behavior={Platform.OS === "ios" ? "position" : undefined}
+        style={[styles.container, style]}
+        pointerEvents="box-none"
+      >
+        {toasts
+          .filter((t) => t.placement === "top")
+          .map((toast) => (
+            <Toast key={toast.id} {...this.props} {...toast} />
+          ))}
+      </KeyboardAvoidingView>
+    );
+  }
+
+  render() {
+    return (
+      <>
+        {this.renderTopToasts()}
+        {this.renderBottomToasts()}
+      </>
     );
   }
 }

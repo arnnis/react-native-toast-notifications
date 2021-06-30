@@ -43,6 +43,7 @@ export default function App() {
           onPress={() =>
             toastRef.current?.show("This is a success toast!", {
               type: "success",
+              placement: "top",
             })
           }
           style={styles.test}
