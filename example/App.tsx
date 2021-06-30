@@ -29,11 +29,38 @@ export default function App() {
           successIcon={
             <MaterialCommunityIcons name="check" color="#fff" size={18} />
           }
+          animationDuration={100}
+          renderType={{
+            success: (toast) => (
+              <View
+                style={{
+                  height: 60,
+                  width: "80%",
+                  backgroundColor: "#fff",
+                  marginVertical: 4,
+                  borderRadius: 8,
+                  borderLeftColor: "green",
+                  borderLeftWidth: 8,
+                  justifyContent: "center",
+                  paddingLeft: 16,
+                }}
+              >
+                <Text>{toast.message}</Text>
+              </View>
+            ),
+          }}
+          // renderToast={(toast) => (
+          //   <View
+          //     style={{ height: 60, width: "100%", backgroundColor: "tomato" }}
+          //   >
+          //     <Text>{toast.message}</Text>
+          //   </View>
+          // )}
         />
 
         <Text
           onPress={() =>
-            toastRef.current?.show("This is a toast!", { duration: 15000 })
+            toastRef.current?.show("This is a toast!", { duration: 10000 })
           }
           style={styles.test}
         >
@@ -43,7 +70,7 @@ export default function App() {
           onPress={() =>
             toastRef.current?.show("This is a success toast!", {
               type: "success",
-              placement: "top",
+              placement: "bottom",
             })
           }
           style={styles.test}
@@ -141,7 +168,7 @@ export default function App() {
           onPress={() => {
             toast?.show("Press to close", {
               duration: 10000,
-              onPress: (id) => toast?.hide(id),
+              onPress: (id) => alert("hey"),
             });
           }}
           style={[styles.test, { marginTop: 30 }]}

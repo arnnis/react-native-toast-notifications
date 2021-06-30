@@ -20,11 +20,12 @@ const dims = Dimensions.get("window");
 export interface ToastOptions {
   id?: string;
   icon?: JSX.Element;
-  type?: "normal" | "success" | "danger" | "warning";
+  type?: "normal" | "success" | "danger" | "warning" | string;
   duration?: number;
   placement?: "top" | "bottom";
   style?: StyleProp<ViewStyle>;
   textStyle?: StyleProp<TextStyle>;
+  animationDuration?: number;
 
   successIcon?: JSX.Element;
   dangerIcon?: JSX.Element;
@@ -42,31 +43,35 @@ export interface ToastProps extends ToastOptions {
   id: string;
   onClose(): void;
   message: string | JSX.Element;
+  renderToast?(toast: ToastProps): JSX.Element;
+  renderType?: { [type: string]: (toast: ToastProps) => JSX.Element };
 }
 
-const Toast: FC<ToastProps> = ({
-  id,
-  onClose,
-  icon,
-  type = "normal",
-  message,
-  duration = 5000,
-  style,
-  textStyle,
+const Toast: FC<ToastProps> = (props) => {
+  let {
+    id,
+    onClose,
+    icon,
+    type = "normal",
+    message,
+    duration = 5000,
+    style,
+    textStyle,
+    animationDuration = 250,
 
-  successIcon,
-  dangerIcon,
-  warningIcon,
+    successIcon,
+    dangerIcon,
+    warningIcon,
 
-  successColor,
-  dangerColor,
-  warningColor,
-  normalColor,
+    successColor,
+    dangerColor,
+    warningColor,
+    normalColor,
 
-  placement,
+    placement,
 
-  onPress,
-}) => {
+    onPress,
+  } = props;
   const containerRef = useRef<View>(null);
   const [animation] = useState(new Animated.Value(0));
   const panResponderRef = useRef<PanResponderInstance>();
@@ -76,7 +81,7 @@ const Toast: FC<ToastProps> = ({
     Animated.timing(animation, {
       toValue: 1,
       useNativeDriver: true,
-      duration: 250,
+      duration: animationDuration,
     }).start();
 
     let closeTimeout: NodeJS.Timeout | null = null;
@@ -86,7 +91,7 @@ const Toast: FC<ToastProps> = ({
         Animated.timing(animation, {
           toValue: 0,
           useNativeDriver: true,
-          duration: 250,
+          duration: animationDuration,
         }).start(() => onClose());
       }, duration);
     }
@@ -115,7 +120,10 @@ const Toast: FC<ToastProps> = ({
   const getPanResponder = () => {
     if (panResponderRef.current) return panResponderRef.current;
     panResponderRef.current = PanResponder.create({
-      onStartShouldSetPanResponder: () => true,
+      onMoveShouldSetPanResponder: (_, gestureState) => {
+        //return true if user is swiping, return false if it's a single click
+        return !(gestureState.dx === 0 && gestureState.dy === 0);
+      },
       onPanResponderMove: (_, gestureState) => {
         getPanResponderAnim()?.setValue({
           x: gestureState.dx,
@@ -169,19 +177,6 @@ const Toast: FC<ToastProps> = ({
     }
   }
 
-  const animationStyle: Animated.WithAnimatedObject<ViewStyle> = {
-    opacity: animation,
-    transform: [
-      {
-        translateY: animation.interpolate({
-          inputRange: [0, 1],
-          outputRange: placement === "bottom" ? [20, 0] : [0, 20], // 0 : 150, 0.5 : 75, 1 : 0
-        }),
-      },
-      getPanResponderAnim().getTranslateTransform()[0],
-    ],
-  };
-
   let backgroundColor = "";
   switch (type) {
     case "success":
@@ -197,32 +192,51 @@ const Toast: FC<ToastProps> = ({
       backgroundColor = normalColor || "#333";
   }
 
-  const renderToast = () => (
+  const animationStyle: Animated.WithAnimatedObject<ViewStyle> = {
+    opacity: animation,
+    transform: [
+      {
+        translateY: animation.interpolate({
+          inputRange: [0, 1],
+          outputRange: placement === "bottom" ? [20, 0] : [0, 20], // 0 : 150, 0.5 : 75, 1 : 0
+        }),
+      },
+      getPanResponderAnim().getTranslateTransform()[0],
+    ],
+  };
+
+  return (
     <Animated.View
       ref={containerRef}
       {...getPanResponder().panHandlers}
-      style={[styles.container, animationStyle, { backgroundColor }, style]}
+      style={[styles.container, animationStyle]}
     >
-      {icon ? <View style={styles.iconContainer}>{icon}</View> : null}
-      {React.isValidElement(message) ? (
-        message
+      {props.renderType && props.renderType[type] ? (
+        props.renderType[type](props)
+      ) : props.renderToast ? (
+        props.renderToast(props)
       ) : (
-        <Text style={[styles.message, textStyle]}>{message}</Text>
+        <TouchableWithoutFeedback
+          disabled={!onPress}
+          onPress={() => onPress && onPress(id)}
+        >
+          <View style={[styles.toastContainer, { backgroundColor }, style]}>
+            {icon ? <View style={styles.iconContainer}>{icon}</View> : null}
+            {React.isValidElement(message) ? (
+              message
+            ) : (
+              <Text style={[styles.message, textStyle]}>{message}</Text>
+            )}
+          </View>
+        </TouchableWithoutFeedback>
       )}
     </Animated.View>
-  );
-
-  return onPress ? (
-    <TouchableWithoutFeedback onPress={() => onPress(id)}>
-      {renderToast()}
-    </TouchableWithoutFeedback>
-  ) : (
-    renderToast()
   );
 };
 
 const styles = StyleSheet.create({
-  container: {
+  container: { width: "100%", alignItems: "center" },
+  toastContainer: {
     paddingHorizontal: 12,
     paddingVertical: 12,
     borderRadius: 5,

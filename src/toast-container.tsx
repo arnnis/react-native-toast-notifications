@@ -12,6 +12,8 @@ const dims = Dimensions.get("window");
 
 export interface Props extends ToastOptions {
   offset?: number;
+  renderToast?(toast: ToastProps): JSX.Element;
+  renderType?: { [type: string]: (toast: ToastProps) => JSX.Element };
 }
 
 interface State {
@@ -98,7 +100,7 @@ class ToastContainer extends Component<Props, State> {
     let style: ViewStyle = {
       top: offset,
       justifyContent: "flex-start",
-      flexDirection: "column",
+      flexDirection: "column-reverse",
     };
     return (
       <KeyboardAvoidingView
@@ -127,16 +129,10 @@ class ToastContainer extends Component<Props, State> {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 0,
     position: "absolute",
     width: dims.width,
     maxWidth: dims.width,
     overflow: "hidden",
-    bottom: 100,
-
-    justifyContent: "flex-end",
-    alignItems: "center",
-    borderRadius: 5,
     zIndex: 999,
     left: 0,
     right: 0,
