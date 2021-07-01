@@ -14,7 +14,7 @@ Toast component for React Native, supports Android, IOS and Web
 
 ## Demo
 
-![](https://user-images.githubusercontent.com/61647712/92497391-8864e900-f20e-11ea-93d8-bacc2b856583.gif)
+![](https://user-images.githubusercontent.com/61647712/124135853-72742d80-da99-11eb-95f8-893281862e96.gif)
 
 [react-native-web Demo](https://arnnis.github.io/react-native-fast-toast/)
 
