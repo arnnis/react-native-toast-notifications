@@ -35,7 +35,7 @@ jobs:
         run: yarn install
 
       - name: Build web
-        run: cd example && expo build:web
+        run: cd example && yarn && expo build:web
 
       - name: Deploy to github pages
         if: success()
