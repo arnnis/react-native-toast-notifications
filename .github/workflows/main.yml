@@ -29,7 +29,7 @@ jobs:
         run: yarn install
 
       - name: Build web
-        run: cd example && npx expo build:web
+        run: cd example &&  y | npx expo build:web
 
       - name: Deploy to github pages
         if: success()
