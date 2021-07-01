@@ -19,21 +19,30 @@ export default function App() {
         custom_toast: (toast) => (
           <View
             style={{
+              maxWidth: "85%",
               paddingHorizontal: 15,
               paddingVertical: 10,
               backgroundColor: "#fff",
               marginVertical: 4,
               borderRadius: 8,
-              borderLeftColor: "green",
-              borderLeftWidth: 8,
+              borderLeftColor: "#00C851",
+              borderLeftWidth: 6,
               justifyContent: "center",
               paddingLeft: 16,
             }}
           >
-            <Text style={{ fontSize: 14, fontWeight: "bold", marginBottom: 5 }}>
+            <Text
+              style={{
+                fontSize: 14,
+                color: "#333",
+                fontWeight: "bold",
+              }}
+            >
               {toast.data.title}
             </Text>
-            <Text>{toast.message}</Text>
+            <Text style={{ color: "#a3a3a3", marginTop: 2 }}>
+              {toast.message}
+            </Text>
           </View>
         ),
       }}
