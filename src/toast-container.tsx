@@ -33,6 +33,9 @@ class ToastContainer extends Component<Props, State> {
     offset: 10,
   };
 
+  /**
+   * Shows a new toast.
+   */
   show = (message: string | JSX.Element, toastOptions?: ToastOptions) => {
     let id = toastOptions?.id || Math.random().toString();
     const onClose = () => this.hide(id);
@@ -55,6 +58,9 @@ class ToastContainer extends Component<Props, State> {
     return id;
   };
 
+  /**
+   * Updates a toast, To use this create you must pass an id to show method first, then pass it here to update the toast.
+   */
   update = (
     id: string,
     message: string | JSX.Element,
@@ -67,10 +73,16 @@ class ToastContainer extends Component<Props, State> {
     });
   };
 
+  /**
+   * Removes a toast from stack
+   */
   hide = (id: string) => {
     this.setState({ toasts: this.state.toasts.filter((t) => t.id !== id) });
   };
 
+  /**
+   * Removes all toasts in stack
+   */
   hideAll = () => {
     this.setState({ toasts: [] });
   };

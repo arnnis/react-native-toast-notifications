@@ -56,10 +56,13 @@ const Home = () => {
         <Text
           onPress={() =>
             toast.show(
-              "This is a customized toast! you can create as many as you want",
+              "This is a customized toast! you can implement your own",
               {
                 type: "custom_toast",
                 animationDuration: 100,
+                data: {
+                  title: "Customized toast",
+                },
               }
             )
           }

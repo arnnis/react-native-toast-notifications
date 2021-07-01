@@ -17,26 +17,96 @@ import {
 const dims = Dimensions.get("window");
 
 export interface ToastOptions {
+  /**
+   * Id is optional, you may provide an id only if you want to update toast later using toast.update()
+   */
   id?: string;
+
+  /**
+   * Customize Toast icon
+   */
   icon?: JSX.Element;
+
+  /**
+   * Toast types, You can implement you custom type with JSX using renderType method on ToastContainer
+   */
   type?: "normal" | "success" | "danger" | "warning" | string;
+
+  /**
+   * In milliseconds, How long toast will stay before it go away
+   */
   duration?: number;
+
+  /**
+   * Customize when toast should be placed
+   */
   placement?: "top" | "bottom";
+
+  /**
+   * Customize style of toast
+   */
   style?: StyleProp<ViewStyle>;
+
+  /**
+   * Customize style of toast text
+   */
   textStyle?: StyleProp<TextStyle>;
+
+  /**
+   * Customize how fast toast will show and hide
+   */
   animationDuration?: number;
+
+  /**
+   * Customize how toast is animated when added or removed
+   */
   animationType?: "slide-in" | "zoom-in";
 
+  /**
+   * Customize success type icon
+   */
   successIcon?: JSX.Element;
+
+  /**
+   * Customize danger type icon
+   */
   dangerIcon?: JSX.Element;
+
+  /**
+   * Customize warning type icon
+   */
   warningIcon?: JSX.Element;
 
+  /**
+   * Customize success type color. changes toast background color
+   */
   successColor?: string;
+
+  /**
+   * Customize danger type color. changes toast background color
+   */
   dangerColor?: string;
+
+  /**
+   * Customize warning type color. changes toast background color
+   */
   warningColor?: string;
+
+  /**
+   * Customize normal type color. changes toast background color
+   */
   normalColor?: string;
 
+  /**
+   * Register event for when toast is pressed. If you're using a custom toast you have to pass this to a Touchable.
+   */
   onPress?(id: string): void;
+
+  /**
+   * payload data for custom toasts. You can pass whatever you want
+   *
+   */
+  data?: any;
 }
 
 export interface ToastProps extends ToastOptions {

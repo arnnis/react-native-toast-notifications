@@ -20,7 +20,7 @@ export default function App() {
           <View
             style={{
               paddingHorizontal: 15,
-              paddingVertical: 15,
+              paddingVertical: 10,
               backgroundColor: "#fff",
               marginVertical: 4,
               borderRadius: 8,
@@ -30,6 +30,9 @@ export default function App() {
               paddingLeft: 16,
             }}
           >
+            <Text style={{ fontSize: 14, fontWeight: "bold", marginBottom: 5 }}>
+              {toast.data.title}
+            </Text>
             <Text>{toast.message}</Text>
           </View>
         ),
