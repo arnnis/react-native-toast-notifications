@@ -209,7 +209,7 @@ const Toast: FC<ToastProps> = (props) => {
     animationStyle.transform?.push({
       scale: animation.interpolate({
         inputRange: [0, 1],
-        outputRange: [0.6, 1],
+        outputRange: [0.7, 1],
       }),
     });
   }

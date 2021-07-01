@@ -12,8 +12,9 @@ export default function App() {
       successIcon={
         <MaterialCommunityIcons name="check" color="#fff" size={18} />
       }
-      // Custom type example
       offset={10}
+      // Custom type example
+
       renderType={{
         custom_toast: (toast) => (
           <View

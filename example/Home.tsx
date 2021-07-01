@@ -69,7 +69,7 @@ const Home = () => {
         </Text>
         <Text
           onPress={() => {
-            toast?.show("This toast should render on top", {
+            toast.show("This toast should render on top", {
               placement: "top",
             });
           }}
@@ -77,7 +77,17 @@ const Home = () => {
         >
           Placement top
         </Text>
-
+        <Text
+          onPress={() => {
+            toast?.show("This toast have zoom-in animation", {
+              placement: "bottom",
+              animationType: "zoom-in",
+            });
+          }}
+          style={[styles.test]}
+        >
+          Zoom in animation type
+        </Text>
         <Text
           onPress={() => {
             let id = toast.show("This toast will update", {});
