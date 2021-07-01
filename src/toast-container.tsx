@@ -30,7 +30,7 @@ class ToastContainer extends Component<Props, State> {
 
   static defaultProps = {
     placement: "bottom",
-    offset: 60,
+    offset: 10,
   };
 
   show = (message: string | JSX.Element, toastOptions?: ToastOptions) => {
@@ -129,13 +129,14 @@ class ToastContainer extends Component<Props, State> {
 
 const styles = StyleSheet.create({
   container: {
+    flex: 0,
     position: "absolute",
     width: dims.width,
     maxWidth: dims.width,
-    overflow: "hidden",
     zIndex: 999,
     left: 0,
     right: 0,
+    ...(Platform.OS === "web" ? { overflow: "hidden" } : null),
   },
   message: {
     color: "#333",

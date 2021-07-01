@@ -11,7 +11,6 @@ import {
   PanResponder,
   PanResponderInstance,
   Dimensions,
-  Platform,
   PanResponderGestureState,
 } from "react-native";
 
@@ -26,6 +25,7 @@ export interface ToastOptions {
   style?: StyleProp<ViewStyle>;
   textStyle?: StyleProp<TextStyle>;
   animationDuration?: number;
+  animationType?: "slide-in" | "zoom-in";
 
   successIcon?: JSX.Element;
   dangerIcon?: JSX.Element;
@@ -58,7 +58,7 @@ const Toast: FC<ToastProps> = (props) => {
     style,
     textStyle,
     animationDuration = 250,
-
+    animationType = "slide-in",
     successIcon,
     dangerIcon,
     warningIcon,
@@ -72,6 +72,7 @@ const Toast: FC<ToastProps> = (props) => {
 
     onPress,
   } = props;
+
   const containerRef = useRef<View>(null);
   const [animation] = useState(new Animated.Value(0));
   const panResponderRef = useRef<PanResponderInstance>();
@@ -131,7 +132,6 @@ const Toast: FC<ToastProps> = (props) => {
         });
       },
       onPanResponderRelease: (_, gestureState) => {
-        console.log("gesture release:", gestureState);
         if (gestureState.dx > 50) {
           panReleaseToRight(gestureState);
         } else if (gestureState.dx < -50) {
@@ -198,12 +198,21 @@ const Toast: FC<ToastProps> = (props) => {
       {
         translateY: animation.interpolate({
           inputRange: [0, 1],
-          outputRange: placement === "bottom" ? [20, 0] : [0, 20], // 0 : 150, 0.5 : 75, 1 : 0
+          outputRange: placement === "bottom" ? [20, 0] : [-20, 0], // 0 : 150, 0.5 : 75, 1 : 0
         }),
       },
       getPanResponderAnim().getTranslateTransform()[0],
     ],
   };
+
+  if (animationType === "zoom-in") {
+    animationStyle.transform?.push({
+      scale: animation.interpolate({
+        inputRange: [0, 1],
+        outputRange: [0.6, 1],
+      }),
+    });
+  }
 
   return (
     <Animated.View
@@ -244,7 +253,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     maxWidth: (dims.width / 10) * 9,
-    ...(Platform.OS === "web" ? { cursor: "pointer" } : null),
+    overflow: "hidden",
   },
   message: {
     color: "#fff",
