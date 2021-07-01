@@ -19,8 +19,8 @@ export default function App() {
         custom_toast: (toast) => (
           <View
             style={{
-              height: 60,
-              width: "80%",
+              paddingHorizontal: 15,
+              paddingVertical: 15,
               backgroundColor: "#fff",
               marginVertical: 4,
               borderRadius: 8,
