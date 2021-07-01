@@ -3,18 +3,19 @@
 [![Version][version-badge]][package]
 [![MIT License][license-badge]][license]
 
-A Toast component for react-native, supports Android, IOS, Web, Windows
+Toast component for React Native, supports Android, IOS and Web
 
 ## Features
 
-- Normal, Success, Danger and Warning toasts
-- Customizable and Icon support
+- Fully Customizable
+- Swipe to close support
 - Smooth animation
 - Fully typed with TypeScript
 
 ## Demo
 
 ![](https://user-images.githubusercontent.com/61647712/92497391-8864e900-f20e-11ea-93d8-bacc2b856583.gif)
+[react-native-web Demo](https://arnnis.github.io/react-native-fast-toast/)
 
 ## Install
 
@@ -24,29 +25,8 @@ Open a Terminal in the project root and run:
 yarn add react-native-fast-toast
 ```
 
-## Basic Example
-
-```js
-import React, { useEffect, useRef } from "react";
-import Toast from "react-native-fast-toast";
-
-export default function App() {
-  const toast = useRef(null);
-
-  useEffect(() => {
-    toast.current.show("Task finished successfully");
-  }, []);
-
-  return (
-    <>
-      <RestOfYourApp />
-      <Toast ref={toast} />
-    </>
-  );
-```
-
-## Hook Example
-You can use hooks to call toasts everywhere, to do so, wrap `ToastProvier` to your root component (index.js or App.js)
+## Example
+Wrap your app in the `ToastProvider`, which provides context for the Toast hook.
 ```js
 import { ToastProvider } from 'react-native-fast-toast'
 
@@ -65,6 +45,16 @@ import { useToast } from 'react-native-fast-toast'
 
 const Component = () => {
   const toast = useToast()
+  
+  useEffect(() => {
+    toast.show("Hello World", {
+      type: 'success | danger | warning | normal | custom',
+      position: 'top | bottom',
+      duration: 4000,
+      offset: 30,
+      animationType: 'slide-in | zoom-in'
+    })
+  }, [])
 }
 ```
 
@@ -84,17 +74,17 @@ export default function App() {
   );
 ```
 
-Now you can call `toast.show()` everywhere on app. like alert.
+Now you can call `toast.show()` everywhere on app. similar to `alert`.
 
 TypeScript Note: add [index.d.ts](/example/index.d.ts) to your project root.
 
-## Type Example
+## Toast Type
 
 ```js
 toast.show("Task finished successfully", { type: "success" });
 ```
 
-## Icon Example
+## Toast Icon
 
 ```js
 toast.show("Task finished successfully", { icon: <Icon /> });
@@ -159,7 +149,6 @@ If this project helped you reduce time to develop, you can buy me a cup of coffe
 ## Hire
 
 Looking for a React/React-Native Expert? Email at alirezarzna@gmail.com
-
 
 ## License
 MIT
