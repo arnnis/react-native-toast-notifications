@@ -26,7 +26,7 @@ Open a Terminal in the project root and run:
 yarn add react-native-fast-toast
 ```
 
-## Example
+## Usage
 Wrap your app in the `ToastProvider`, which provides context for the Toast hook.
 ```js
 import { ToastProvider } from 'react-native-fast-toast'
@@ -48,20 +48,89 @@ const Component = () => {
   const toast = useToast()
   
   useEffect(() => {
-    toast.show("Hello World", {
-      type: 'success | danger | warning | normal | custom',
-      position: 'top | bottom',
-      duration: 4000,
-      offset: 30,
-      animationType: 'slide-in | zoom-in'
-    })
+    toast.show("Hello World")
   }, [])
 }
 ```
 
-## Global Example
+## Methods
+### show()
 
-Alternatively, To call toasts everywhere (even outside of React components like in redux actions), do this in root component of your app (index.js or App.js)
+```js
+toast.show("Task finished successfully", {
+      type: 'normal | success | warning | danger | custom',
+      position: 'top | bottom',
+      duration: 4000,
+      offset: 30,
+      animationType: 'slide-in | zoom-in'
+});
+```
+
+### update()
+
+```js
+let id = Math.random().toString()
+toast.show("Loading...", {id})
+toast.update(id, "Loading compeleted");
+```
+
+### hide()
+
+```js
+let id = Math.random().toString()
+toast.show("Loading...", {id})
+toast.hide(id);
+// or
+toast.hideAll()
+```
+
+## Customization
+
+### `ToastContainer` props
+There are lots of props to customize your toast or your can use renderToast to implement your own component.
+
+```js
+<ToastContainer
+    placement="bottom | top"
+    duration={5000}
+    animationType='slide-in | zoom-in'
+    animationDuration={250}
+    successColor="green"
+    dangerColor="red"
+    warningColor="orange"
+    normalColor="gray"
+    icon={<Icon />}
+    successIcon={<SuccessIcon />}
+    dangerIcon={<DangerIcon />}
+    warningIcon={<WarningIcon />}
+    textStyle={{ fontSize: 20 }}
+    offset={50}
+    renderToast={(toastOptions) => JSX.Element} implement custom toast component.
+/>
+```
+
+### Custom toast types
+You can implement your own custom types or overwrite the existing ones
+
+```js
+<ToastContainer
+    renderType={{
+      custom_type: (toast) => (
+        <View style={{padding: 15, backgroundColor: 'grey'}}>
+          <Text>{toast.message}</Text>
+        </View>
+      )
+    }}
+/>
+
+// You can pass other data to your custom toast using data property in show method.
+toast.show("Show custom toast", {data: { title: 'Toast title' }})
+```
+
+## FAQ
+### - How to call toast outside React components?
+
+To call toasts everywhere (even outside of React components like in redux actions), do this in root component of your app (index.js or App.js)
 
 ```js
 import Toast from "react-native-fast-toast";
@@ -79,61 +148,22 @@ Now you can call `toast.show()` everywhere on app. similar to `alert`.
 
 TypeScript Note: add [index.d.ts](/example/index.d.ts) to your project root.
 
-## Toast Type
+### - How to show toast inside a Modal?
+The Modal component is a native view that sits on top of the rest of react-native application. The only way to put something above it is to put something in the modal itself, or alternately to use a JS only implementation of a Modal. 
 
-```js
-toast.show("Task finished successfully", { type: "success" });
+As a workaround you can put toast inside modal like this:
 ```
+import Toast from "react-native-fast-toast";
 
-## Toast Icon
+export Component = () => {
+    const toastRef = useRef();
+    return (
+        <Modal>
+            .....
+            <Toast ref={toastRef} />
+        </Modal>
 
-```js
-toast.show("Task finished successfully", { icon: <Icon /> });
-```
-
-or
-
-```js
-<Toast
-  ref={toast}
-  icon={<Icon />}
-  successIcon={<SuccessIcon />}
-  dangerIcon={<DangerIcon />}
-  warningIcon={<WarningIcon />}
-/>
 }
-```
-
-## Customize
-
-```js
-toast.show("Task finished successfully", {
-  duration: 5000,
-  style: { padding: 0 },
-  textStyle: { fontSize: 20 },
-});
-```
-
-You can customize default options in Toast component
-
-```js
-<Toast 
-  duration={5000} 
-  textStyle={{ fontSize: 20 }}
-  successColor="green"
-  dangerColor="red"
-  warningColor="orange"
-  normalColor="gray"
-/>
-```
-
-## Placement
-
-```js
-<Toast
-  placement="bottom | top" // default to bottom
-  offset={50} // distance from bottom or top. ( default to 60 )
-/>
 ```
 
 ## Contributing
