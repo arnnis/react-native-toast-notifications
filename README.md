@@ -86,11 +86,11 @@ toast.hideAll()
 
 ## Customization
 
-### `ToastContainer` props
+### `ToastProvider` props
 There are lots of props to customize your toast or your can use renderToast to implement your own component.
 
 ```js
-<ToastContainer
+<ToastProvider
     placement="bottom | top"
     duration={5000}
     animationType='slide-in | zoom-in'
@@ -106,14 +106,16 @@ There are lots of props to customize your toast or your can use renderToast to i
     textStyle={{ fontSize: 20 }}
     offset={50}
     renderToast={(toastOptions) => JSX.Element} implement custom toast component.
-/>
+>
+...
+</>
 ```
 
 ### Custom toast types
 You can implement your own custom types or overwrite the existing ones
 
 ```js
-<ToastContainer
+<ToastProvider
     renderType={{
       custom_type: (toast) => (
         <View style={{padding: 15, backgroundColor: 'grey'}}>
@@ -121,7 +123,9 @@ You can implement your own custom types or overwrite the existing ones
         </View>
       )
     }}
-/>
+>
+...
+</>
 
 // You can pass other data to your custom toast using data property in show method.
 toast.show("Show custom toast", {data: { title: 'Toast title' }})
