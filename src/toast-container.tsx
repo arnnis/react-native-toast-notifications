@@ -48,6 +48,7 @@ class ToastContainer extends Component<Props, State> {
             id,
             onClose,
             message,
+            ...this.props,
             ...toastOptions,
           },
           ...this.state.toasts,
@@ -104,7 +105,7 @@ class ToastContainer extends Component<Props, State> {
         {toasts
           .filter((t) => !t.placement || t.placement === "bottom")
           .map((toast) => (
-            <Toast key={toast.id} {...this.props} {...toast} />
+            <Toast key={toast.id} {...toast} />
           ))}
       </KeyboardAvoidingView>
     );
@@ -127,7 +128,7 @@ class ToastContainer extends Component<Props, State> {
         {toasts
           .filter((t) => t.placement === "top")
           .map((toast) => (
-            <Toast key={toast.id} {...this.props} {...toast} />
+            <Toast key={toast.id} {...toast} />
           ))}
       </KeyboardAvoidingView>
     );

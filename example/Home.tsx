@@ -26,7 +26,6 @@ const Home = () => {
           onPress={() =>
             toast.show("This is a success toast!", {
               type: "success",
-              placement: "bottom",
             })
           }
           style={styles.test}
