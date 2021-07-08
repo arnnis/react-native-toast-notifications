@@ -1,6 +1,6 @@
 import React from "react";
 import { StyleSheet, View, Text } from "react-native";
-import { ToastProvider } from "react-native-fast-toast";
+import { ToastProvider } from "react-native-toast-notifications";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import Home from "./Home";
 
