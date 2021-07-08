@@ -1,5 +1,5 @@
 {
-  "name": "react-native-fast-toast",
+  "name": "react-native-toast-notifications",
   "version": "3.0.1",
   "main": "lib/commonjs/index.js",
   "module": "lib/module/index.js",
@@ -14,7 +14,7 @@
     "name": "Alireza Rezania",
     "email": "alireza.rzna@gmail.com"
   },
-  "homepage": "https://github.com/arnnis/react-native-fast-toast#readme",
+  "homepage": "https://github.com/arnnis/react-native-toast-notifications#readme",
   "peerDependencies": {
     "react": "*",
     "react-native": "*"

@@ -1,4 +1,4 @@
-type ToastType = import("react-native-fast-toast").ToastType
+type ToastType = import("react-native-toast-notifications").ToastType;
 
 declare global {
   const toast: ToastType;

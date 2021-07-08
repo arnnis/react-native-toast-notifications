@@ -1,6 +1,6 @@
 {
   "main": "node_modules/expo/AppEntry.js",
-  "homepage": "https://arnnis.github.io/react-native-fast-toast",
+  "homepage": "https://arnnis.github.io/react-native-toast-notifications",
   "scripts": {
     "start": "expo start",
     "android": "expo start --android",

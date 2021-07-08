@@ -1,11 +1,11 @@
 ---
 name: Bug report
-about: Please search the existing issues and read the documentation before opening
+about:
+  Please search the existing issues and read the documentation before opening
   an issue.
-title: ''
+title: ""
 labels: bug
-assignees: ''
-
+assignees: ""
 ---
 
 <!-- Issues that don't use this template are likely to be closed. -->
@@ -34,10 +34,10 @@ For Syntax Highlighting check this [link](https://help.github.com/en/articles/cr
 
 ### Your Environment
 
-| software                     | version
-| ---------------------------- | -------
-| ios or android               |
-| react-native                 |
-| react-native-fast-toast      |
-| node                         |
-| npm or yarn                  |
+| software                         | version |
+| -------------------------------- | ------- |
+| ios or android                   |
+| react-native                     |
+| react-native-toast-notifications |
+| node                             |
+| npm or yarn                      |
