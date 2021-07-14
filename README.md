@@ -73,16 +73,14 @@ toast.show("Task finished successfully", {
 ### update()
 
 ```js
-let id = Math.random().toString();
-toast.show("Loading...", { id });
-toast.update(id, "Loading compeleted");
+let id = toast.show("Loading...");
+toast.update(id, "Loading compeleted", {type: "success"});
 ```
 
 ### hide()
 
 ```js
-let id = Math.random().toString();
-toast.show("Loading...", { id });
+let id = toast.show("Loading...");
 toast.hide(id);
 // or
 toast.hideAll();
