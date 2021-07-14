@@ -11,9 +11,11 @@ import Toast, { ToastOptions, ToastProps } from "./toast";
 const dims = Dimensions.get("window");
 
 export interface Props extends ToastOptions {
-  offset?: number;
   renderToast?(toast: ToastProps): JSX.Element;
   renderType?: { [type: string]: (toast: ToastProps) => JSX.Element };
+  offset?: number;
+  offsetTop?: number;
+  offsetBottom?: number;
 }
 
 interface State {
@@ -99,9 +101,9 @@ class ToastContainer extends Component<Props, State> {
 
   renderBottomToasts() {
     const { toasts } = this.state;
-    let { offset } = this.props;
+    let { offset, offsetBottom } = this.props;
     let style: ViewStyle = {
-      bottom: offset,
+      bottom: offsetBottom || offset,
       justifyContent: "flex-end",
       flexDirection: "column",
     };
@@ -122,9 +124,9 @@ class ToastContainer extends Component<Props, State> {
 
   renderTopToasts() {
     const { toasts } = this.state;
-    let { offset } = this.props;
+    let { offset, offsetTop } = this.props;
     let style: ViewStyle = {
-      top: offset,
+      top: offsetTop || offset,
       justifyContent: "flex-start",
       flexDirection: "column-reverse",
     };
