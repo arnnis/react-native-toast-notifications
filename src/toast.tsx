@@ -23,17 +23,17 @@ export interface ToastOptions {
   id?: string;
 
   /**
-   * Customize Toast icon
+   * Customize toast icon
    */
   icon?: JSX.Element;
 
   /**
-   * Toast types, You can implement you custom type with JSX using renderType method on ToastContainer
+   * Toast types, You can implement your custom types with JSX using renderType method on ToastContainer.
    */
   type?: "normal" | "success" | "danger" | "warning" | string;
 
   /**
-   * In milliseconds, How long toast will stay before it go away
+   * In ms, How long toast will stay before it go away
    */
   duration?: number;
 
@@ -103,24 +103,25 @@ export interface ToastOptions {
   onPress?(id: string): void;
 
   /**
-   * payload data for custom toasts. You can pass whatever you want
-   *
+   * Payload data for custom toasts. You can pass whatever you want
    */
   data?: any;
 }
 
 export interface ToastProps extends ToastOptions {
   id: string;
-  onClose(): void;
+  onDestroy(): void;
   message: string | JSX.Element;
+  open: boolean;
   renderToast?(toast: ToastProps): JSX.Element;
   renderType?: { [type: string]: (toast: ToastProps) => JSX.Element };
+  onHide(): void;
 }
 
 const Toast: FC<ToastProps> = (props) => {
   let {
     id,
-    onClose,
+    onDestroy,
     icon,
     type = "normal",
     message,
@@ -147,6 +148,7 @@ const Toast: FC<ToastProps> = (props) => {
   const [animation] = useState(new Animated.Value(0));
   const panResponderRef = useRef<PanResponderInstance>();
   const panResponderAnimRef = useRef<Animated.ValueXY>();
+  const closeTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
   useEffect(() => {
     Animated.timing(animation, {
@@ -154,30 +156,42 @@ const Toast: FC<ToastProps> = (props) => {
       useNativeDriver: true,
       duration: animationDuration,
     }).start();
-
-    let closeTimeout: NodeJS.Timeout | null = null;
-
     if (duration !== 0 && typeof duration === "number") {
-      closeTimeout = setTimeout(() => {
-        Animated.timing(animation, {
-          toValue: 0,
-          useNativeDriver: true,
-          duration: animationDuration,
-        }).start(() => onClose());
+      closeTimeoutRef.current = setTimeout(() => {
+        handleClose();
       }, duration);
     }
 
     return () => {
-      closeTimeout && clearTimeout(closeTimeout);
+      closeTimeoutRef.current && clearTimeout(closeTimeoutRef.current);
     };
   }, []);
+
+  // Handles hide & hideAll
+  useEffect(() => {
+    if (!props.open) {
+      // Unregister close timeout
+      closeTimeoutRef.current && clearTimeout(closeTimeoutRef.current);
+
+      // Close animation them remove from stack.
+      handleClose();
+    }
+  }, [props.open]);
+
+  const handleClose = () => {
+    Animated.timing(animation, {
+      toValue: 0,
+      useNativeDriver: true,
+      duration: animationDuration,
+    }).start(() => onDestroy());
+  };
 
   const panReleaseToLeft = (gestureState: PanResponderGestureState) => {
     Animated.timing(getPanResponderAnim(), {
       toValue: { x: (-dims.width / 10) * 9, y: gestureState.dy },
       useNativeDriver: true,
       duration: 250,
-    }).start(() => onClose());
+    }).start(() => onDestroy());
   };
 
   const panReleaseToRight = (gestureState: PanResponderGestureState) => {
@@ -185,7 +199,7 @@ const Toast: FC<ToastProps> = (props) => {
       toValue: { x: (dims.width / 10) * 9, y: gestureState.dy },
       useNativeDriver: true,
       duration: 250,
-    }).start(() => onClose());
+    }).start(() => onDestroy());
   };
 
   const getPanResponder = () => {

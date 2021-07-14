@@ -34,11 +34,12 @@ class ToastContainer extends Component<Props, State> {
   };
 
   /**
-   * Shows a new toast.
+   * Shows a new toast. Returns id
    */
   show = (message: string | JSX.Element, toastOptions?: ToastOptions) => {
     let id = toastOptions?.id || Math.random().toString();
-    const onClose = () => this.hide(id);
+    const onDestroy = () =>
+      this.setState({ toasts: this.state.toasts.filter((t) => t.id !== id) });
 
     requestAnimationFrame(() => {
       this.setState({ toasts: this.state.toasts.filter((t) => t.id !== id) });
@@ -46,8 +47,10 @@ class ToastContainer extends Component<Props, State> {
         toasts: [
           {
             id,
-            onClose,
+            onDestroy,
             message,
+            open: true,
+            onHide: () => this.hide(id),
             ...this.props,
             ...toastOptions,
           },
@@ -78,14 +81,20 @@ class ToastContainer extends Component<Props, State> {
    * Removes a toast from stack
    */
   hide = (id: string) => {
-    this.setState({ toasts: this.state.toasts.filter((t) => t.id !== id) });
+    this.setState({
+      toasts: this.state.toasts.map((t) =>
+        t.id === id ? { ...t, open: false } : t
+      ),
+    });
   };
 
   /**
    * Removes all toasts in stack
    */
   hideAll = () => {
-    this.setState({ toasts: [] });
+    this.setState({
+      toasts: this.state.toasts.map((t) => ({ ...t, open: false })),
+    });
   };
 
   renderBottomToasts() {

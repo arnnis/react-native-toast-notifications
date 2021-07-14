@@ -70,6 +70,17 @@ const Home = () => {
           Custom type
         </Text>
         <Text
+          onPress={() =>
+            toast.show("This is a customized toast with close button!", {
+              type: "with_close_button",
+              animationDuration: 100,
+            })
+          }
+          style={styles.test}
+        >
+          Custom type 2
+        </Text>
+        <Text
           onPress={() => {
             toast.show("This toast should render on top", {
               placement: "top",
@@ -108,7 +119,7 @@ const Home = () => {
 
         <Text
           onPress={() => {
-            toast?.show("Global toast call");
+            toast.show("Global toast call");
           }}
           style={[styles.test]}
         >
@@ -117,8 +128,8 @@ const Home = () => {
 
         <Text
           onPress={() => {
-            toast?.show("Toast 1");
-            toast?.show("Toast 2");
+            toast.show("Toast 1");
+            toast.show("Toast 2");
           }}
           style={[styles.test, { marginTop: 30 }]}
         >
@@ -127,9 +138,11 @@ const Home = () => {
 
         <Text
           onPress={() => {
-            toast?.show("Press to close", {
+            toast.show("Press to close", {
               duration: 10000,
-              onPress: (id) => alert("hey"),
+              onPress: (id) => {
+                toast.hide(id);
+              },
             });
           }}
           style={[styles.test, { marginBottom: 30 }]}
@@ -144,11 +157,21 @@ const Home = () => {
         <Text
           onPress={() => {
             inputRef.current?.focus();
-            toast?.show("Hi!");
+            toast.show("Hi!");
           }}
           style={[styles.test]}
         >
           Toast avoids keyboard
+        </Text>
+
+        <Text
+          onPress={() => {
+            inputRef.current?.focus();
+            toast.hideAll();
+          }}
+          style={[styles.test]}
+        >
+          Hide all open toasts
         </Text>
       </View>
     </ToastProvider>
