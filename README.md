@@ -107,7 +107,9 @@ There are lots of props to customize your toast or your can use renderToast to i
     dangerIcon={<DangerIcon />}
     warningIcon={<WarningIcon />}
     textStyle={{ fontSize: 20 }}
-    offset={50}
+    offset={50} // offset for both top and bottom toasts
+    offsetTop={30}
+    offsetBotton={40}
     renderToast={(toastOptions) => JSX.Element} implement custom toast component.
 >
 ...
