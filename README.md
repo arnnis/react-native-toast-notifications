@@ -63,7 +63,7 @@ const Component = () => {
 ```js
 toast.show("Task finished successfully", {
   type: "normal | success | warning | danger | custom",
-  position: "top | bottom",
+  placement: "top | bottom",
   duration: 4000,
   offset: 30,
   animationType: "slide-in | zoom-in",
@@ -74,7 +74,7 @@ toast.show("Task finished successfully", {
 
 ```js
 let id = toast.show("Loading...");
-toast.update(id, "Loading compeleted", {type: "success"});
+toast.update(id, "Loading completed", {type: "success"});
 ```
 
 ### hide()
