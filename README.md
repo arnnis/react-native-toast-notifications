@@ -3,7 +3,7 @@
 [![Version][version-badge]][package]
 [![MIT License][license-badge]][license]
 
-(formerly react-native-fast-toast) Toast component for React Native, supports Android, IOS and Web
+Toast component for React Native, supports Android, IOS and Web
 
 ## Features
 
