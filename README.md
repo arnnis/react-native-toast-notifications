@@ -100,6 +100,7 @@ There are lots of props to customize your toast or your can use renderToast to i
     animationDuration={250}
     successColor="green"
     dangerColor="red"
+    dangerColor="red"
     warningColor="orange"
     normalColor="gray"
     icon={<Icon />}
@@ -110,6 +111,7 @@ There are lots of props to customize your toast or your can use renderToast to i
     offset={50} // offset for both top and bottom toasts
     offsetTop={30}
     offsetBottom={40}
+    swipeEnabled={true}
     renderToast={(toastOptions) => JSX.Element} implement custom toast component.
 >
 ...

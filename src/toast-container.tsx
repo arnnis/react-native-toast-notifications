@@ -16,6 +16,7 @@ export interface Props extends ToastOptions {
   offset?: number;
   offsetTop?: number;
   offsetBottom?: number;
+  swipeEnabled?: boolean;
 }
 
 interface State {
@@ -30,9 +31,10 @@ class ToastContainer extends Component<Props, State> {
     };
   }
 
-  static defaultProps = {
+  static defaultProps: Props = {
     placement: "bottom",
     offset: 10,
+    swipeEnabled: true,
   };
 
   /**

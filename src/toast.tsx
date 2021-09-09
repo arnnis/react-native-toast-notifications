@@ -111,6 +111,8 @@ export interface ToastOptions {
    * Payload data for custom toasts. You can pass whatever you want
    */
   data?: any;
+
+  swipeEnabled?: boolean;
 }
 
 export interface ToastProps extends ToastOptions {
@@ -143,6 +145,7 @@ const Toast: FC<ToastProps> = (props) => {
     warningColor,
     normalColor,
     placement,
+    swipeEnabled,
     onPress,
     onClose,
   } = props;
@@ -289,9 +292,12 @@ const Toast: FC<ToastProps> = (props) => {
           outputRange: placement === "bottom" ? [20, 0] : [-20, 0], // 0 : 150, 0.5 : 75, 1 : 0
         }),
       },
-      getPanResponderAnim().getTranslateTransform()[0],
     ],
   };
+
+  if (swipeEnabled) {
+    animationStyle.transform?.push(getPanResponderAnim().getTranslateTransform()[0]);
+  }
 
   if (animationType === "zoom-in") {
     animationStyle.transform?.push({
@@ -305,7 +311,7 @@ const Toast: FC<ToastProps> = (props) => {
   return (
     <Animated.View
       ref={containerRef}
-      {...getPanResponder().panHandlers}
+      {...(swipeEnabled ? getPanResponder().panHandlers : null)}
       style={[styles.container, animationStyle]}
     >
       {props.renderType && props.renderType[type] ? (

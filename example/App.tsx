@@ -9,12 +9,9 @@ export default function App() {
     <ToastProvider
       placement="bottom"
       dangerIcon={<MaterialCommunityIcons name="close" color="#fff" />}
-      successIcon={
-        <MaterialCommunityIcons name="check" color="#fff" size={18} />
-      }
+      successIcon={<MaterialCommunityIcons name="check" color="#fff" size={18} />}
       offset={10}
       // Custom type example
-
       renderType={{
         custom_toast: (toast) => (
           <View
@@ -40,9 +37,7 @@ export default function App() {
             >
               {toast.data.title}
             </Text>
-            <Text style={{ color: "#a3a3a3", marginTop: 2 }}>
-              {toast.message}
-            </Text>
+            <Text style={{ color: "#a3a3a3", marginTop: 2 }}>{toast.message}</Text>
           </View>
         ),
         with_close_button: (toast) => (
@@ -60,9 +55,7 @@ export default function App() {
               flexDirection: "row",
             }}
           >
-            <Text style={{ color: "#a3a3a3", marginRight: 16 }}>
-              {toast.message}
-            </Text>
+            <Text style={{ color: "#a3a3a3", marginRight: 16 }}>{toast.message}</Text>
             <TouchableOpacity
               onPress={() => toast.onHide()}
               style={{
@@ -75,9 +68,7 @@ export default function App() {
                 alignItems: "center",
               }}
             >
-              <Text
-                style={{ color: "#fff", fontWeight: "500", marginBottom: 2.5 }}
-              >
+              <Text style={{ color: "#fff", fontWeight: "500", marginBottom: 2.5 }}>
                 x
               </Text>
             </TouchableOpacity>

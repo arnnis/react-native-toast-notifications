@@ -54,16 +54,13 @@ const Home = () => {
         </Text>
         <Text
           onPress={() =>
-            toast.show(
-              "This is a customized toast! you can implement your own",
-              {
-                type: "custom_toast",
-                animationDuration: 100,
-                data: {
-                  title: "Customized toast",
-                },
-              }
-            )
+            toast.show("This is a customized toast! you can implement your own", {
+              type: "custom_toast",
+              animationDuration: 100,
+              data: {
+                title: "Customized toast",
+              },
+            })
           }
           style={styles.test}
         >
@@ -145,15 +142,21 @@ const Home = () => {
               },
             });
           }}
-          style={[styles.test, { marginBottom: 30 }]}
+          style={[styles.test]}
         >
           Toast onPress & close on press
         </Text>
-        <TextInput
-          ref={inputRef}
-          style={{ height: 50 }}
-          placeholder="Input"
-        ></TextInput>
+        <Text
+          onPress={() => {
+            inputRef.current?.focus();
+            toast.show("Hi!", { swipeEnabled: false });
+          }}
+          style={[styles.test, { marginBottom: 30 }]}
+        >
+          Swipe to close disabled
+        </Text>
+        <TextInput ref={inputRef} style={{ height: 50 }} placeholder="Input"></TextInput>
+
         <Text
           onPress={() => {
             inputRef.current?.focus();
