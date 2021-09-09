@@ -103,6 +103,11 @@ export interface ToastOptions {
   onPress?(id: string): void;
 
   /**
+   * Execute event after toast is closed
+   */
+  onClose?(): void;
+
+  /**
    * Payload data for custom toasts. You can pass whatever you want
    */
   data?: any;
@@ -133,15 +138,13 @@ const Toast: FC<ToastProps> = (props) => {
     successIcon,
     dangerIcon,
     warningIcon,
-
     successColor,
     dangerColor,
     warningColor,
     normalColor,
-
     placement,
-
     onPress,
+    onClose,
   } = props;
 
   const containerRef = useRef<View>(null);
@@ -179,6 +182,7 @@ const Toast: FC<ToastProps> = (props) => {
   }, [props.open]);
 
   const handleClose = () => {
+    onClose && onClose();
     Animated.timing(animation, {
       toValue: 0,
       useNativeDriver: true,
