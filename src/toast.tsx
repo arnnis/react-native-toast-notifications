@@ -147,7 +147,6 @@ const Toast: FC<ToastProps> = (props) => {
     placement,
     swipeEnabled,
     onPress,
-    onClose,
   } = props;
 
   const containerRef = useRef<View>(null);
@@ -185,7 +184,6 @@ const Toast: FC<ToastProps> = (props) => {
   }, [props.open]);
 
   const handleClose = () => {
-    onClose && onClose();
     Animated.timing(animation, {
       toValue: 0,
       useNativeDriver: true,

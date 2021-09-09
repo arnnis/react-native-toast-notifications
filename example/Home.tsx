@@ -166,10 +166,19 @@ const Home = () => {
         >
           Toast avoids keyboard
         </Text>
-
         <Text
           onPress={() => {
             inputRef.current?.focus();
+            toast.show("Logs to console on close", {
+              onClose: () => console.log("Toast closed!"),
+            });
+          }}
+          style={[styles.test]}
+        >
+          onClose event
+        </Text>
+        <Text
+          onPress={() => {
             toast.hideAll();
           }}
           style={[styles.test]}
