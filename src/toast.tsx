@@ -11,6 +11,7 @@ import {
   PanResponder,
   PanResponderInstance,
   PanResponderGestureState,
+  Platform,
 } from "react-native";
 import { useDimensions } from "./utils/useDimensions";
 
@@ -157,7 +158,7 @@ const Toast: FC<ToastProps> = (props) => {
   useEffect(() => {
     Animated.timing(animation, {
       toValue: 1,
-      useNativeDriver: true,
+      useNativeDriver: Platform.OS !== "web",
       duration: animationDuration,
     }).start();
     if (duration !== 0 && typeof duration === "number") {
@@ -185,7 +186,7 @@ const Toast: FC<ToastProps> = (props) => {
   const handleClose = () => {
     Animated.timing(animation, {
       toValue: 0,
-      useNativeDriver: true,
+      useNativeDriver: Platform.OS !== "web",
       duration: animationDuration,
     }).start(() => onDestroy());
   };
@@ -193,7 +194,7 @@ const Toast: FC<ToastProps> = (props) => {
   const panReleaseToLeft = (gestureState: PanResponderGestureState) => {
     Animated.timing(getPanResponderAnim(), {
       toValue: { x: (-dims.width / 10) * 9, y: gestureState.dy },
-      useNativeDriver: true,
+      useNativeDriver: Platform.OS !== "web",
       duration: 250,
     }).start(() => onDestroy());
   };
@@ -201,7 +202,7 @@ const Toast: FC<ToastProps> = (props) => {
   const panReleaseToRight = (gestureState: PanResponderGestureState) => {
     Animated.timing(getPanResponderAnim(), {
       toValue: { x: (dims.width / 10) * 9, y: gestureState.dy },
-      useNativeDriver: true,
+      useNativeDriver: Platform.OS !== "web",
       duration: 250,
     }).start(() => onDestroy());
   };
@@ -227,7 +228,7 @@ const Toast: FC<ToastProps> = (props) => {
         } else {
           Animated.spring(getPanResponderAnim(), {
             toValue: { x: 0, y: 0 },
-            useNativeDriver: true,
+            useNativeDriver: Platform.OS !== "web",
           }).start();
         }
       },
