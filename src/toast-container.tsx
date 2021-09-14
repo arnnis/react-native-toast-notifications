@@ -1,14 +1,11 @@
 import React, { Component } from "react";
 import {
   StyleSheet,
-  Dimensions,
   ViewStyle,
   KeyboardAvoidingView,
   Platform,
 } from "react-native";
 import Toast, { ToastOptions, ToastProps } from "./toast";
-
-const dims = Dimensions.get("window");
 
 export interface Props extends ToastOptions {
   renderToast?(toast: ToastProps): JSX.Element;
@@ -71,7 +68,11 @@ class ToastContainer extends Component<Props, State> {
   /**
    * Updates a toast, To use this create you must pass an id to show method first, then pass it here to update the toast.
    */
-  update = (id: string, message: string | JSX.Element, toastOptions?: ToastOptions) => {
+  update = (
+    id: string,
+    message: string | JSX.Element,
+    toastOptions?: ToastOptions
+  ) => {
     this.setState({
       toasts: this.state.toasts.map((toast) =>
         toast.id === id ? { ...toast, message, ...toastOptions } : toast
@@ -84,7 +85,9 @@ class ToastContainer extends Component<Props, State> {
    */
   hide = (id: string) => {
     this.setState({
-      toasts: this.state.toasts.map((t) => (t.id === id ? { ...t, open: false } : t)),
+      toasts: this.state.toasts.map((t) =>
+        t.id === id ? { ...t, open: false } : t
+      ),
     });
   };
 
@@ -157,8 +160,8 @@ const styles = StyleSheet.create({
   container: {
     flex: 0,
     position: "absolute",
-    width: dims.width,
-    maxWidth: dims.width,
+    width: "100%",
+    maxWidth: "100%",
     zIndex: 999999,
     left: 0,
     right: 0,

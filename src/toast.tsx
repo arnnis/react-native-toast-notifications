@@ -10,11 +10,9 @@ import {
   TouchableWithoutFeedback,
   PanResponder,
   PanResponderInstance,
-  Dimensions,
   PanResponderGestureState,
 } from "react-native";
-
-const dims = Dimensions.get("window");
+import { useDimensions } from "./utils/useDimensions";
 
 export interface ToastOptions {
   /**
@@ -154,6 +152,7 @@ const Toast: FC<ToastProps> = (props) => {
   const panResponderRef = useRef<PanResponderInstance>();
   const panResponderAnimRef = useRef<Animated.ValueXY>();
   const closeTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const dims = useDimensions();
 
   useEffect(() => {
     Animated.timing(animation, {
@@ -294,7 +293,9 @@ const Toast: FC<ToastProps> = (props) => {
   };
 
   if (swipeEnabled) {
-    animationStyle.transform?.push(getPanResponderAnim().getTranslateTransform()[0]);
+    animationStyle.transform?.push(
+      getPanResponderAnim().getTranslateTransform()[0]
+    );
   }
 
   if (animationType === "zoom-in") {
@@ -321,7 +322,13 @@ const Toast: FC<ToastProps> = (props) => {
           disabled={!onPress}
           onPress={() => onPress && onPress(id)}
         >
-          <View style={[styles.toastContainer, { backgroundColor }, style]}>
+          <View
+            style={[
+              styles.toastContainer,
+              { maxWidth: (dims.width / 10) * 9, backgroundColor },
+              style,
+            ]}
+          >
             {icon ? <View style={styles.iconContainer}>{icon}</View> : null}
             {React.isValidElement(message) ? (
               message
@@ -344,7 +351,6 @@ const styles = StyleSheet.create({
     marginVertical: 5,
     flexDirection: "row",
     alignItems: "center",
-    maxWidth: (dims.width / 10) * 9,
     overflow: "hidden",
   },
   message: {
