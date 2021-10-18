@@ -9,9 +9,9 @@ export function useDimensions() {
   };
 
   useEffect(() => {
-    Dimensions.addEventListener("change", onChange);
+    const EventListener = Dimensions.addEventListener("change", onChange);
 
-    return () => Dimensions.removeEventListener("change", onChange);
+    return EventListener.remove();
   }, []);
 
   return dimensions;
