@@ -158,8 +158,7 @@ class ToastContainer extends Component<Props, State> {
   }
 }
 
-const 
-s = StyleSheet.create({
+const styles = StyleSheet.create({
   container: {
     flex: 0,
     position: "absolute",
