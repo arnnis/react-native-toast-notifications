@@ -47,6 +47,11 @@ export interface ToastOptions {
   style?: StyleProp<ViewStyle>;
 
   /**
+   * Customize style of toasts container
+   */
+  containerStyle?: StyleProp<ViewStyle>;
+  
+  /**
    * Customize style of toast text
    */
   textStyle?: StyleProp<TextStyle>;
@@ -312,7 +317,7 @@ const Toast: FC<ToastProps> = (props) => {
     <Animated.View
       ref={containerRef}
       {...(swipeEnabled ? getPanResponder().panHandlers : null)}
-      style={[styles.container, animationStyle]}
+      style={[styles.container, containerStyle, animationStyle]}
     >
       {props.renderType && props.renderType[type] ? (
         props.renderType[type](props)
