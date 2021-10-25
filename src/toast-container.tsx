@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import {
   StyleSheet,
   ViewStyle,
+  StyleProp,
   KeyboardAvoidingView,
   Platform,
 } from "react-native";
@@ -14,6 +15,7 @@ export interface Props extends ToastOptions {
   offsetTop?: number;
   offsetBottom?: number;
   swipeEnabled?: boolean;
+  wrapperStyle?: StyleProp<ViewStyle>;
 }
 
 interface State {
@@ -102,7 +104,7 @@ class ToastContainer extends Component<Props, State> {
 
   renderBottomToasts() {
     const { toasts } = this.state;
-    let { offset, offsetBottom } = this.props;
+    let { offset, offsetBottom, wrapperStyle } = this.props;
     let style: ViewStyle = {
       bottom: offsetBottom || offset,
       justifyContent: "flex-end",
@@ -111,7 +113,7 @@ class ToastContainer extends Component<Props, State> {
     return (
       <KeyboardAvoidingView
         behavior={Platform.OS === "ios" ? "position" : undefined}
-        style={[styles.container, style]}
+        style={[styles.container, wrapperStyle, style]}
         pointerEvents="box-none"
       >
         {toasts
@@ -125,7 +127,7 @@ class ToastContainer extends Component<Props, State> {
 
   renderTopToasts() {
     const { toasts } = this.state;
-    let { offset, offsetTop } = this.props;
+    let { offset, offsetTop, wrapperStyle } = this.props;
     let style: ViewStyle = {
       top: offsetTop || offset,
       justifyContent: "flex-start",
@@ -134,7 +136,7 @@ class ToastContainer extends Component<Props, State> {
     return (
       <KeyboardAvoidingView
         behavior={Platform.OS === "ios" ? "position" : undefined}
-        style={[styles.container, style]}
+        style={[styles.container, wrapperStyle, style]}
         pointerEvents="box-none"
       >
         {toasts
