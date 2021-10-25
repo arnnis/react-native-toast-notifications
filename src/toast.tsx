@@ -139,6 +139,7 @@ const Toast: FC<ToastProps> = (props) => {
     duration = 5000,
     style,
     textStyle,
+    containerStyle,
     animationDuration = 250,
     animationType = "slide-in",
     successIcon,
