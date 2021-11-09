@@ -1,6 +1,6 @@
 {
   "name": "react-native-toast-notifications",
-  "version": "3.2.2",
+  "version": "3.2.3",
   "main": "lib/commonjs/index.js",
   "module": "lib/module/index.js",
   "types": "lib/typescript/index.d.ts",
