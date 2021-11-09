@@ -9,9 +9,18 @@ export function useDimensions() {
   };
 
   useEffect(() => {
-    Dimensions.addEventListener("change", onChange);
+    const subscription = Dimensions.addEventListener("change", onChange);
 
-    return () => Dimensions.removeEventListener("change", onChange);
+    return () => {
+      // @ts-expect-error - React Native >= 0.65
+      if (typeof subscription?.remove === "function") {
+        // @ts-expect-error
+        subscription.remove();
+      } else {
+        // React Native < 0.65
+        Dimensions.removeEventListener("change", onChange);
+      }
+    };
   }, []);
 
   return dimensions;
