@@ -163,6 +163,7 @@ const styles = StyleSheet.create({
     width: "100%",
     maxWidth: "100%",
     zIndex: 999999,
+    elevation: 999999,
     left: 0,
     right: 0,
     ...(Platform.OS === "web" ? { overflow: "hidden" } : null),
