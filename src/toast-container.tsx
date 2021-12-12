@@ -45,7 +45,6 @@ class ToastContainer extends Component<Props, State> {
     };
 
     requestAnimationFrame(() => {
-      this.setState({ toasts: this.state.toasts.filter((t) => t.id !== id) });
       this.setState({
         toasts: [
           {
@@ -57,7 +56,7 @@ class ToastContainer extends Component<Props, State> {
             ...this.props,
             ...toastOptions,
           },
-          ...this.state.toasts,
+          ...this.state.toasts.filter((t) => t.open),
         ],
       });
     });
