@@ -17,10 +17,10 @@ const Home = () => {
       <View style={styles.container}>
         <StatusBar style="auto" />
         <Text
-          onPress={() => toast.show("This is a toast!", { duration: 10000 })}
+          onPress={() => toast.show("This is a toast!", { duration: 10000, offset: 100 })}
           style={styles.test}
         >
-          Normal
+          Normal with offset
         </Text>
         <Text
           onPress={() =>

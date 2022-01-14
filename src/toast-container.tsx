@@ -109,17 +109,27 @@ class ToastContainer extends Component<Props, State> {
       flexDirection: "column",
     };
     return (
-      <KeyboardAvoidingView
-        behavior={Platform.OS === "ios" ? "position" : undefined}
-        style={[styles.container, style]}
-        pointerEvents="box-none"
-      >
-        {toasts
+      <>
+      {
+        toasts
           .filter((t) => !t.placement || t.placement === "bottom")
-          .map((toast) => (
-            <Toast key={toast.id} {...toast} />
-          ))}
-      </KeyboardAvoidingView>
+          .map((toast) => {
+            if(toast.offset){
+              style.bottom = toast.offset;
+            }
+            return (
+              <KeyboardAvoidingView
+              key={toast.id} 
+              behavior={Platform.OS === "ios" ? "position" : undefined}
+              style={[styles.container, style]}
+              pointerEvents="box-none"
+            >
+                <Toast {...toast}/>
+            </KeyboardAvoidingView>
+            )
+          })
+      }
+      </>
     );
   }
 
@@ -132,17 +142,27 @@ class ToastContainer extends Component<Props, State> {
       flexDirection: "column-reverse",
     };
     return (
-      <KeyboardAvoidingView
-        behavior={Platform.OS === "ios" ? "position" : undefined}
-        style={[styles.container, style]}
-        pointerEvents="box-none"
-      >
-        {toasts
-          .filter((t) => t.placement === "top")
-          .map((toast) => (
-            <Toast key={toast.id} {...toast} />
-          ))}
-      </KeyboardAvoidingView>
+      <>
+      {
+        toasts
+          .filter((t) =>t.placement === "top")
+          .map((toast) => {
+            if(toast.offset){
+              style.top = toast.offset;
+            }
+            return (
+              <KeyboardAvoidingView
+              key={toast.id} 
+              behavior={Platform.OS === "ios" ? "position" : undefined}
+              style={[styles.container, style]}
+              pointerEvents="box-none"
+            >
+                <Toast {...toast}/>
+            </KeyboardAvoidingView>
+            ) 
+          })
+      }
+      </>
     );
   }
 

@@ -102,6 +102,11 @@ export interface ToastOptions {
   onPress?(id: string): void;
 
   /**
+   * Offset for position of toast.
+   */
+  offset?:number;
+
+  /**
    * Execute event after toast is closed
    */
   onClose?(): void;
