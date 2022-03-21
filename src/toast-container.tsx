@@ -159,11 +159,9 @@ const styles = StyleSheet.create({
   container: {
     flex: 0,
     position: "absolute",
-    width: "100%",
     maxWidth: "100%",
     zIndex: 999999,
-    left: 0,
-    right: 0,
+    alignSelf: 'center',
     ...(Platform.OS === "web" ? { overflow: "hidden" } : null),
   },
   message: {
