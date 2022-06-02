@@ -4,8 +4,11 @@ import {
   ViewStyle,
   KeyboardAvoidingView,
   Platform,
+  Dimensions,
 } from "react-native";
 import Toast, { ToastOptions, ToastProps } from "./toast";
+
+const { height, width } = Dimensions.get("window");
 
 export interface Props extends ToastOptions {
   renderToast?(toast: ToastProps): JSX.Element;
@@ -145,11 +148,47 @@ class ToastContainer extends Component<Props, State> {
     );
   }
 
+  renderCenterToasts() {
+    const { toasts } = this.state;
+    let { offset, offsetTop } = this.props;
+    let style: ViewStyle = {
+      top: offsetTop || offset,
+      justifyContent: "flex-start",
+      flexDirection: "column-reverse",
+    };
+
+    const data = toasts.filter((t) => t.placement === "center");
+    const foundToast = data.length > 0;
+
+    if (!foundToast) return null;
+
+    return (
+      <KeyboardAvoidingView
+        behavior={Platform.OS === "ios" ? "position" : undefined}
+        style={[styles.container, style]}
+        contentContainerStyle={{
+          height: height,
+          width: width,
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+        pointerEvents="box-none"
+      >
+        {toasts
+          .filter((t) => t.placement === "center")
+          .map((toast) => (
+            <Toast key={toast.id} {...toast} />
+          ))}
+      </KeyboardAvoidingView>
+    );
+  }
+
   render() {
     return (
       <>
         {this.renderTopToasts()}
         {this.renderBottomToasts()}
+        {this.renderCenterToasts()}
       </>
     );
   }
