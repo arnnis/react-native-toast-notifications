@@ -14,6 +14,7 @@ export interface Props extends ToastOptions {
   offsetTop?: number;
   offsetBottom?: number;
   swipeEnabled?: boolean;
+  children?: React.ReactNode;
 }
 
 interface State {
