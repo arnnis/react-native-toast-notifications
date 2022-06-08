@@ -74,7 +74,14 @@ class ToastContainer extends Component<Props, State> {
   ) => {
     this.setState({
       toasts: this.state.toasts.map((toast) =>
-        toast.id === id ? { ...toast, message, ...toastOptions } : toast
+        toast.id === id
+          ? {
+              ...toast,
+              message,
+              ...toastOptions,
+              updateId: (Math.random() * 10).toString(),
+            }
+          : toast
       ),
     });
   };
