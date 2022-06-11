@@ -39,7 +39,7 @@ export interface ToastOptions {
   /**
    * Customize when toast should be placed
    */
-  placement?: "top" | "bottom";
+  placement?: "top" | "bottom" | "center";
 
   /**
    * Customize style of toast
