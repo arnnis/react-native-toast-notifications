@@ -102,6 +102,13 @@ class ToastContainer extends Component<Props, State> {
     });
   };
 
+  /**
+   * Check if a toast is currently open
+   */
+  isOpen = (id: string) => {
+    return this.state.toasts.some((t) => t.id === id && t.open);
+  }
+
   renderBottomToasts() {
     const { toasts } = this.state;
     let { offset, offsetBottom } = this.props;
