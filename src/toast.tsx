@@ -111,11 +111,6 @@ export interface ToastOptions {
    */
   data?: any;
 
-  /**
-   * Optional id to reset duration of the toast after an update is done
-   */
-  updateId?: string;
-
   swipeEnabled?: boolean;
 }
 
@@ -139,7 +134,6 @@ const Toast: FC<ToastProps> = (props) => {
     duration = 5000,
     style,
     textStyle,
-    updateId,
     animationDuration = 250,
     animationType = "slide-in",
     successIcon,
@@ -177,22 +171,6 @@ const Toast: FC<ToastProps> = (props) => {
       closeTimeoutRef.current && clearTimeout(closeTimeoutRef.current);
     };
   }, [duration]);
-
-  /**
-   * On every update, changing the updateId will reset the animation
-   */
-  useEffect(() => {
-    if (updateId && closeTimeoutRef.current) {
-      clearTimeout(closeTimeoutRef.current);
-      closeTimeoutRef.current = setTimeout(() => {
-        handleClose();
-      }, duration);
-    }
-
-    return () => {
-      closeTimeoutRef.current && clearTimeout(closeTimeoutRef.current);
-    };
-  }, [updateId]);
 
   // Handles hide & hideAll
   useEffect(() => {
