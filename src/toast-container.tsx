@@ -73,21 +73,11 @@ class ToastContainer extends Component<Props, State> {
   update = (
     id: string,
     message: string | JSX.Element,
-    toastOptions?: ToastOptions,
-    resetAnimation = false
+    toastOptions?: ToastOptions
   ) => {
     this.setState({
       toasts: this.state.toasts.map((toast) =>
-        toast.id === id
-          ? {
-              ...toast,
-              message,
-              ...toastOptions,
-              updateId: resetAnimation
-                ? (Math.random() * 10).toString()
-                : undefined,
-            }
-          : toast
+        toast.id === id ? { ...toast, message, ...toastOptions } : toast
       ),
     });
   };
