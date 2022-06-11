@@ -196,6 +196,7 @@ const styles = StyleSheet.create({
     position: "absolute",
     maxWidth: "100%",
     zIndex: 999999,
+    elevation: 999999,
     alignSelf: 'center',
     ...(Platform.OS === "web" ? { overflow: "hidden" } : null),
   },
