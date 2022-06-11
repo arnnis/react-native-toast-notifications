@@ -170,7 +170,7 @@ const Toast: FC<ToastProps> = (props) => {
     return () => {
       closeTimeoutRef.current && clearTimeout(closeTimeoutRef.current);
     };
-  }, []);
+  }, [duration]);
 
   // Handles hide & hideAll
   useEffect(() => {
