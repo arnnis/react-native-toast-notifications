@@ -269,13 +269,13 @@ const Toast: FC<ToastProps> = (props) => {
   let backgroundColor = "";
   switch (type) {
     case "success":
-      backgroundColor = successColor || "#00C851";
+      backgroundColor = successColor || "rgb(46, 125, 50)";
       break;
     case "danger":
-      backgroundColor = dangerColor || "#ff4444";
+      backgroundColor = dangerColor || "rgb(211, 47, 47)";
       break;
     case "warning":
-      backgroundColor = warningColor || "#ffbb33";
+      backgroundColor = warningColor || "rgb(237, 108, 2)";
       break;
     default:
       backgroundColor = normalColor || "#333";
