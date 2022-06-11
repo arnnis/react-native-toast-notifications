@@ -153,7 +153,9 @@ class ToastContainer extends Component<Props, State> {
     let { offset, offsetTop } = this.props;
     let style: ViewStyle = {
       top: offsetTop || offset,
-      justifyContent: "flex-start",
+      height: height,
+      width: width,
+      justifyContent: "center",
       flexDirection: "column-reverse",
     };
 
@@ -166,12 +168,6 @@ class ToastContainer extends Component<Props, State> {
       <KeyboardAvoidingView
         behavior={Platform.OS === "ios" ? "position" : undefined}
         style={[styles.container, style]}
-        contentContainerStyle={{
-          height: height,
-          width: width,
-          alignItems: "center",
-          justifyContent: "center",
-        }}
         pointerEvents="box-none"
       >
         {toasts
