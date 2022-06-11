@@ -4,8 +4,11 @@ import {
   ViewStyle,
   KeyboardAvoidingView,
   Platform,
+  Dimensions,
 } from "react-native";
 import Toast, { ToastOptions, ToastProps } from "./toast";
+
+const { height, width } = Dimensions.get("window");
 
 export interface Props extends ToastOptions {
   renderToast?(toast: ToastProps): JSX.Element;
@@ -45,7 +48,6 @@ class ToastContainer extends Component<Props, State> {
     };
 
     requestAnimationFrame(() => {
-      this.setState({ toasts: this.state.toasts.filter((t) => t.id !== id) });
       this.setState({
         toasts: [
           {
@@ -57,7 +59,7 @@ class ToastContainer extends Component<Props, State> {
             ...this.props,
             ...toastOptions,
           },
-          ...this.state.toasts,
+          ...this.state.toasts.filter((t) => t.open),
         ],
       });
     });
@@ -146,11 +148,43 @@ class ToastContainer extends Component<Props, State> {
     );
   }
 
+  renderCenterToasts() {
+    const { toasts } = this.state;
+    let { offset, offsetTop } = this.props;
+    let style: ViewStyle = {
+      top: offsetTop || offset,
+      height: height,
+      width: width,
+      justifyContent: "center",
+      flexDirection: "column-reverse",
+    };
+
+    const data = toasts.filter((t) => t.placement === "center");
+    const foundToast = data.length > 0;
+
+    if (!foundToast) return null;
+
+    return (
+      <KeyboardAvoidingView
+        behavior={Platform.OS === "ios" ? "position" : undefined}
+        style={[styles.container, style]}
+        pointerEvents="box-none"
+      >
+        {toasts
+          .filter((t) => t.placement === "center")
+          .map((toast) => (
+            <Toast key={toast.id} {...toast} />
+          ))}
+      </KeyboardAvoidingView>
+    );
+  }
+
   render() {
     return (
       <>
         {this.renderTopToasts()}
         {this.renderBottomToasts()}
+        {this.renderCenterToasts()}
       </>
     );
   }
@@ -160,12 +194,10 @@ const styles = StyleSheet.create({
   container: {
     flex: 0,
     position: "absolute",
-    width: "100%",
     maxWidth: "100%",
     zIndex: 999999,
     elevation: 999999,
-    left: 0,
-    right: 0,
+    alignSelf: 'center',
     ...(Platform.OS === "web" ? { overflow: "hidden" } : null),
   },
   message: {

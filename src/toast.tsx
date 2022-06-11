@@ -39,7 +39,7 @@ export interface ToastOptions {
   /**
    * Customize when toast should be placed
    */
-  placement?: "top" | "bottom";
+  placement?: "top" | "bottom" | "center";
 
   /**
    * Customize style of toast
@@ -170,7 +170,7 @@ const Toast: FC<ToastProps> = (props) => {
     return () => {
       closeTimeoutRef.current && clearTimeout(closeTimeoutRef.current);
     };
-  }, []);
+  }, [duration]);
 
   // Handles hide & hideAll
   useEffect(() => {

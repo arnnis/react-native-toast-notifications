@@ -54,13 +54,16 @@ const Home = () => {
         </Text>
         <Text
           onPress={() =>
-            toast.show("This is a customized toast! you can implement your own", {
-              type: "custom_toast",
-              animationDuration: 100,
-              data: {
-                title: "Customized toast",
-              },
-            })
+            toast.show(
+              "This is a customized toast! you can implement your own",
+              {
+                type: "custom_toast",
+                animationDuration: 100,
+                data: {
+                  title: "Customized toast",
+                },
+              }
+            )
           }
           style={styles.test}
         >
@@ -86,6 +89,16 @@ const Home = () => {
           style={[styles.test, { marginTop: 30 }]}
         >
           Placement top
+        </Text>
+        <Text
+          onPress={() => {
+            toast.show("This toast should render on center", {
+              placement: "center",
+            });
+          }}
+          style={[styles.test]}
+        >
+          Placement center
         </Text>
         <Text
           onPress={() => {
@@ -155,7 +168,11 @@ const Home = () => {
         >
           Swipe to close disabled
         </Text>
-        <TextInput ref={inputRef} style={{ height: 50 }} placeholder="Input"></TextInput>
+        <TextInput
+          ref={inputRef}
+          style={{ height: 50 }}
+          placeholder="Input"
+        ></TextInput>
 
         <Text
           onPress={() => {
