@@ -114,6 +114,7 @@ class ToastContainer extends Component<Props, State> {
     let { offset, offsetBottom } = this.props;
     let style: ViewStyle = {
       bottom: offsetBottom || offset,
+      width: width,
       justifyContent: "flex-end",
       flexDirection: "column",
     };
@@ -137,6 +138,7 @@ class ToastContainer extends Component<Props, State> {
     let { offset, offsetTop } = this.props;
     let style: ViewStyle = {
       top: offsetTop || offset,
+      width: width,
       justifyContent: "flex-start",
       flexDirection: "column-reverse",
     };
