@@ -108,6 +108,7 @@ There are lots of props to customize your toast or your can use renderToast to i
     dangerIcon={<DangerIcon />}
     warningIcon={<WarningIcon />}
     textStyle={{ fontSize: 20 }}
+    containerNativeID="container-native-id"
     offset={50} // offset for both top and bottom toasts
     offsetTop={30}
     offsetBottom={40}

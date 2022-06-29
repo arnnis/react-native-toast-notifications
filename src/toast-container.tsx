@@ -17,6 +17,7 @@ export interface Props extends ToastOptions {
   offsetTop?: number;
   offsetBottom?: number;
   swipeEnabled?: boolean;
+  containerNativeID?: string;
 }
 
 interface State {
@@ -35,6 +36,7 @@ class ToastContainer extends Component<Props, State> {
     placement: "bottom",
     offset: 10,
     swipeEnabled: true,
+    containerNativeID: undefined,
   };
 
   /**
@@ -111,7 +113,7 @@ class ToastContainer extends Component<Props, State> {
 
   renderBottomToasts() {
     const { toasts } = this.state;
-    let { offset, offsetBottom } = this.props;
+    let { offset, offsetBottom, containerNativeID } = this.props;
     let style: ViewStyle = {
       bottom: offsetBottom || offset,
       width: width,
@@ -123,6 +125,7 @@ class ToastContainer extends Component<Props, State> {
         behavior={Platform.OS === "ios" ? "position" : undefined}
         style={[styles.container, style]}
         pointerEvents="box-none"
+        nativeID={containerNativeID}
       >
         {toasts
           .filter((t) => !t.placement || t.placement === "bottom")
@@ -135,7 +138,7 @@ class ToastContainer extends Component<Props, State> {
 
   renderTopToasts() {
     const { toasts } = this.state;
-    let { offset, offsetTop } = this.props;
+    let { offset, offsetTop, containerNativeID } = this.props;
     let style: ViewStyle = {
       top: offsetTop || offset,
       width: width,
@@ -147,6 +150,7 @@ class ToastContainer extends Component<Props, State> {
         behavior={Platform.OS === "ios" ? "position" : undefined}
         style={[styles.container, style]}
         pointerEvents="box-none"
+        nativeID={containerNativeID}
       >
         {toasts
           .filter((t) => t.placement === "top")
@@ -159,7 +163,7 @@ class ToastContainer extends Component<Props, State> {
 
   renderCenterToasts() {
     const { toasts } = this.state;
-    let { offset, offsetTop } = this.props;
+    let { offset, offsetTop, containerNativeID } = this.props;
     let style: ViewStyle = {
       top: offsetTop || offset,
       height: height,
@@ -178,6 +182,7 @@ class ToastContainer extends Component<Props, State> {
         behavior={Platform.OS === "ios" ? "position" : undefined}
         style={[styles.container, style]}
         pointerEvents="box-none"
+        nativeID={containerNativeID}
       >
         {toasts
           .filter((t) => t.placement === "center")
