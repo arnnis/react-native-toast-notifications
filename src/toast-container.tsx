@@ -8,7 +8,7 @@ import {
 } from "react-native";
 import Toast, { ToastOptions, ToastProps } from "./toast";
 
-const { height, width } = Dimensions.get("window");
+const { height } = Dimensions.get("window");
 
 export interface Props extends ToastOptions {
   renderToast?(toast: ToastProps): JSX.Element;
@@ -114,7 +114,6 @@ class ToastContainer extends Component<Props, State> {
     let { offset, offsetBottom } = this.props;
     let style: ViewStyle = {
       bottom: offsetBottom || offset,
-      width: width,
       justifyContent: "flex-end",
       flexDirection: "column",
     };
@@ -138,7 +137,6 @@ class ToastContainer extends Component<Props, State> {
     let { offset, offsetTop } = this.props;
     let style: ViewStyle = {
       top: offsetTop || offset,
-      width: width,
       justifyContent: "flex-start",
       flexDirection: "column-reverse",
     };
@@ -163,7 +161,6 @@ class ToastContainer extends Component<Props, State> {
     let style: ViewStyle = {
       top: offsetTop || offset,
       height: height,
-      width: width,
       justifyContent: "center",
       flexDirection: "column-reverse",
     };
