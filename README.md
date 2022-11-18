@@ -37,7 +37,7 @@ export default function App() {
   return (
     <ToastProvider>
       <RestOfYourApp />
-    <ToastProvider/>
+    </ToastProvider>
   );
 }
 ```
