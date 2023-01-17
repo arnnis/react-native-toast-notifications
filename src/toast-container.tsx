@@ -122,7 +122,7 @@ class ToastContainer extends Component<Props, State> {
       <KeyboardAvoidingView
         behavior={Platform.OS === "ios" ? "position" : undefined}
         style={[styles.container, style]}
-        pointerEvents="box-none"
+        pointerEvents="none"
       >
         {toasts
           .filter((t) => !t.placement || t.placement === "bottom")
@@ -146,7 +146,7 @@ class ToastContainer extends Component<Props, State> {
       <KeyboardAvoidingView
         behavior={Platform.OS === "ios" ? "position" : undefined}
         style={[styles.container, style]}
-        pointerEvents="box-none"
+        pointerEvents="none"
       >
         {toasts
           .filter((t) => t.placement === "top")
@@ -177,7 +177,7 @@ class ToastContainer extends Component<Props, State> {
       <KeyboardAvoidingView
         behavior={Platform.OS === "ios" ? "position" : undefined}
         style={[styles.container, style]}
-        pointerEvents="box-none"
+        pointerEvents="none"
       >
         {toasts
           .filter((t) => t.placement === "center")

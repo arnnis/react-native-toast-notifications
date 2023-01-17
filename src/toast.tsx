@@ -313,6 +313,7 @@ const Toast: FC<ToastProps> = (props) => {
       ref={containerRef}
       {...(swipeEnabled ? getPanResponder().panHandlers : null)}
       style={[styles.container, animationStyle]}
+      pointerEvents="box-none"
     >
       {props.renderType && props.renderType[type] ? (
         props.renderType[type](props)
