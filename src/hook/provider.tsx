@@ -2,7 +2,7 @@ import React, { FC, useEffect, useRef, useState } from "react";
 import ToastContext from "./context";
 import Toast, { Props } from "../toast-container";
 
-const ToastProvider: FC<Props> = ({ children, ...props }) => {
+const ToastProvider: FC<Props & { children: React.ReactNode; }> = ({ children, ...props }) => {
   const toastRef = useRef(null);
   const [refState, setRefState] = useState({});
 
