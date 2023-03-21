@@ -4,7 +4,7 @@ import {
   ViewStyle,
   KeyboardAvoidingView,
   Platform,
-  Dimensions,
+  Dimensions, SafeAreaView,
 } from "react-native";
 import Toast, { ToastOptions, ToastProps } from "./toast";
 
@@ -124,11 +124,13 @@ class ToastContainer extends Component<Props, State> {
         style={[styles.container, style]}
         pointerEvents="box-none"
       >
-        {toasts
-          .filter((t) => !t.placement || t.placement === "bottom")
-          .map((toast) => (
-            <Toast key={toast.id} {...toast} />
-          ))}
+        <SafeAreaView>
+          {toasts
+            .filter((t) => !t.placement || t.placement === "bottom")
+            .map((toast) => (
+              <Toast key={toast.id} {...toast} />
+            ))}
+        </SafeAreaView>
       </KeyboardAvoidingView>
     );
   }
@@ -148,11 +150,13 @@ class ToastContainer extends Component<Props, State> {
         style={[styles.container, style]}
         pointerEvents="box-none"
       >
-        {toasts
-          .filter((t) => t.placement === "top")
-          .map((toast) => (
-            <Toast key={toast.id} {...toast} />
-          ))}
+        <SafeAreaView>
+          {toasts
+            .filter((t) => t.placement === "top")
+            .map((toast) => (
+              <Toast key={toast.id} {...toast} />
+            ))}
+        </SafeAreaView>
       </KeyboardAvoidingView>
     );
   }
