@@ -3,7 +3,7 @@ import ToastContainer from "../toast-container";
 
 export type ToastType = Pick<
   ToastContainer,
-  "show" | "update" | "hide" | "hideAll"
+  "show" | "update" | "hide" | "hideAll" | "isOpen"
 >;
 
 const ToastContext = React.createContext({} as ToastType);
