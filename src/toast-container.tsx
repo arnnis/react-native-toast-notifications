@@ -202,7 +202,8 @@ class ToastContainer extends Component<Props, State> {
 const styles = StyleSheet.create({
   container: {
     flex: 0,
-    position: "absolute",
+    // @ts-ignore: fixed is available on web.
+    position: Platform.OS === "web" ? "fixed" : "absolute",
     maxWidth: "100%",
     zIndex: 999999,
     elevation: 999999,
