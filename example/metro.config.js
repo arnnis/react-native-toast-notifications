@@ -1,7 +1,7 @@
 // Config code borrowed from react-native-tab-view
 const path = require('path');
 const fs = require('fs');
-const blacklist = require('metro-config/src/defaults/blacklist');
+const blacklist = require('metro-config/src/defaults/exclusionList');
 const escape = require('escape-string-regexp');
 
 const root = path.resolve(__dirname, '..');
