@@ -310,6 +310,7 @@ const Toast: FC<ToastProps> = (props) => {
 
   return (
     <Animated.View
+      pointerEvents={"box-none"}
       ref={containerRef}
       {...(swipeEnabled ? getPanResponder().panHandlers : null)}
       style={[styles.container, animationStyle]}
