@@ -1,19 +1,14 @@
 import { StatusBar } from "expo-status-bar";
-import React, { useRef, useEffect } from "react";
+import React, { useRef } from "react";
 import { StyleSheet, Text, View, TextInput } from "react-native";
 
-import { ToastProvider, useToast } from "react-native-toast-notifications";
+import { useToast, Toast} from "react-native-toast-notifications";
 
 const Home = () => {
   const toast = useToast();
   const inputRef = useRef<TextInput>(null);
 
-  useEffect(() => {
-    global["toast"] = toast;
-  }, []);
-
   return (
-    <ToastProvider placement="bottom">
       <View style={styles.container}>
         <StatusBar style="auto" />
         <Text
@@ -129,7 +124,7 @@ const Home = () => {
 
         <Text
           onPress={() => {
-            toast.show("Global toast call");
+            Toast.show("Global toast call")
           }}
           style={[styles.test]}
         >
@@ -203,7 +198,6 @@ const Home = () => {
           Hide all open toasts
         </Text>
       </View>
-    </ToastProvider>
   );
 };
 const styles = StyleSheet.create({

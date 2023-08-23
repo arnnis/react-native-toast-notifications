@@ -1,8 +1,8 @@
 import React from "react";
 import { StyleSheet, View, Text, TouchableOpacity } from "react-native";
-import { ToastProvider } from "react-native-toast-notifications";
+import { ToastProvider, } from "react-native-toast-notifications";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
-import Home from "./Home";
+import Home from "./src/Home";
 
 export default function App() {
   return (

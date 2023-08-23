@@ -212,7 +212,7 @@ const styles = StyleSheet.create({
     zIndex: 999999,
     elevation: 999999,
     alignSelf: 'center',
-    ...(Platform.OS === "web" ? { overflow: "hidden" } : null),
+    ...(Platform.OS === "web" ? { overflow: "hidden", userSelect: 'none' } : null),
   },
   message: {
     color: "#333",
