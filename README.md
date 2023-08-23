@@ -143,23 +143,15 @@ toast.show("Show custom toast", {data: { title: 'Toast title' }})
 
 ### - How to call toast outside React components?
 
-To call toasts everywhere (even outside of React components like in redux actions), do this in root component of your app (index.js or App.js)
+To call toasts everywhere (even outside of React components like in redux actions), After you wrapped your app in `ToastProvider`, You can use the `Toast` import to call toasts everywhre.
 
 ```js
-import Toast from "react-native-toast-notifications";
+import {Toast} from "react-native-toast-notifications";
 
-export default function App() {
-  return (
-    <>
-      <RestOfYourApp />
-      <Toast ref={(ref) => global['toast'] = ref} />
-    </>
-  );
+// you can call this everywhere
+Toast.show('toast message')
 ```
 
-Now you can call `toast.show()` everywhere on app. similar to `alert`.
-
-TypeScript Note: add [index.d.ts](/example/index.d.ts) to your project root.
 
 ### - How to show toast inside a Modal?
 
