@@ -42,25 +42,32 @@ class ToastContainer extends Component<Props, State> {
    */
   show = (message: string | JSX.Element, toastOptions?: ToastOptions) => {
     let id = toastOptions?.id || Math.random().toString();
+    let dismissAllPreviousToast = toastOptions?.dismissAllPreviousToast || true;
+
     const onDestroy = () => {
       toastOptions?.onClose && toastOptions?.onClose();
       this.setState({ toasts: this.state.toasts.filter((t) => t.id !== id) });
     };
 
     requestAnimationFrame(() => {
+      let constructedToastState = [
+        {
+          id,
+          onDestroy,
+          message,
+          open: true,
+          onHide: () => this.hide(id),
+          ...this.props,
+          ...toastOptions,
+        }
+      ]
+
+      if(!dismissAllPreviousToast){
+        constructedToastState = [...constructedToastState, ...this.state.toasts.filter((t) => t.open)]
+      }
+
       this.setState({
-        toasts: [
-          {
-            id,
-            onDestroy,
-            message,
-            open: true,
-            onHide: () => this.hide(id),
-            ...this.props,
-            ...toastOptions,
-          },
-          ...this.state.toasts.filter((t) => t.open),
-        ],
+        toasts: constructedToastState,
       });
     });
 
