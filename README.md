@@ -112,6 +112,7 @@ There are lots of props to customize your toast or your can use renderToast to i
     offsetTop={30}
     offsetBottom={40}
     swipeEnabled={true}
+    dismissAllPreviousToast={true} // false by default enable this to show one toast at a time
     renderToast={(toastOptions) => JSX.Element} implement custom toast component.
 >
 ...
