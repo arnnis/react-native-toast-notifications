@@ -111,6 +111,12 @@ export interface ToastOptions {
    */
   data?: any;
 
+  /**
+   * Dismiss previous toast
+   */
+
+  dismissAllPreviousToast?: boolean;
+
   swipeEnabled?: boolean;
 }
 

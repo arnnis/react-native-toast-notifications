@@ -4,7 +4,8 @@ import {
   ViewStyle,
   KeyboardAvoidingView,
   Platform,
-  Dimensions, SafeAreaView,
+  Dimensions,
+  SafeAreaView,
 } from "react-native";
 import Toast, { ToastOptions, ToastProps } from "./toast";
 
@@ -42,25 +43,34 @@ class ToastContainer extends Component<Props, State> {
    */
   show = (message: string | JSX.Element, toastOptions?: ToastOptions) => {
     let id = toastOptions?.id || Math.random().toString();
+
     const onDestroy = () => {
       toastOptions?.onClose && toastOptions?.onClose();
       this.setState({ toasts: this.state.toasts.filter((t) => t.id !== id) });
     };
 
+    const createdToast = {
+      id,
+      onDestroy,
+      message,
+      open: true,
+      onHide: () => this.hide(id),
+      ...this.props,
+      ...toastOptions,
+    };
+
+    const dismissAllPreviousToast =
+      createdToast.dismissAllPreviousToast || false;
+
+    const openToasts = dismissAllPreviousToast
+      ? []
+      : this.state.toasts.filter((t) => t.open);
+
+    const constructedToastState = [createdToast, ...openToasts];
+
     requestAnimationFrame(() => {
       this.setState({
-        toasts: [
-          {
-            id,
-            onDestroy,
-            message,
-            open: true,
-            onHide: () => this.hide(id),
-            ...this.props,
-            ...toastOptions,
-          },
-          ...this.state.toasts.filter((t) => t.open),
-        ],
+        toasts: constructedToastState,
       });
     });
 
@@ -107,7 +117,7 @@ class ToastContainer extends Component<Props, State> {
    */
   isOpen = (id: string) => {
     return this.state.toasts.some((t) => t.id === id && t.open);
-  }
+  };
 
   renderBottomToasts() {
     const { toasts } = this.state;
@@ -211,8 +221,10 @@ const styles = StyleSheet.create({
     maxWidth: "100%",
     zIndex: 999999,
     elevation: 999999,
-    alignSelf: 'center',
-    ...(Platform.OS === "web" ? { overflow: "hidden", userSelect: 'none' } : null),
+    alignSelf: "center",
+    ...(Platform.OS === "web"
+      ? { overflow: "hidden", userSelect: "none" }
+      : null),
   },
   message: {
     color: "#333",
