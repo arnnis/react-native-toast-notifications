@@ -118,13 +118,16 @@ class ToastContainer extends Component<Props, State> {
       justifyContent: "flex-end",
       flexDirection: "column",
     };
+    let safeAreaStyle: ViewStyle = {
+      flex: 1
+    }
     return (
       <KeyboardAvoidingView
         behavior={Platform.OS === "ios" ? "position" : undefined}
         style={[styles.container, style]}
         pointerEvents="box-none"
       >
-        <SafeAreaView>
+        <SafeAreaView style={safeAreaStyle}>
           {toasts
             .filter((t) => !t.placement || t.placement === "bottom")
             .map((toast) => (
