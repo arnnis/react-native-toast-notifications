@@ -120,7 +120,7 @@ class ToastContainer extends Component<Props, State> {
     };
     let safeAreaStyle: ViewStyle = {
       flex: 1
-    }
+    };
     return (
       <KeyboardAvoidingView
         behavior={Platform.OS === "ios" ? "position" : undefined}
