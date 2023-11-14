@@ -211,6 +211,7 @@ const Toast: FC<ToastProps> = (props) => {
     if (panResponderRef.current) return panResponderRef.current;
     const swipeThreshold = Platform.OS === "android" ? 10 : 0;
     panResponderRef.current = PanResponder.create({
+      onStartShouldSetPanResponder: (evt, gestureState) => true,
       onMoveShouldSetPanResponder: (_, gestureState) => {
         //return true if user is swiping, return false if it's a single click
         return (
