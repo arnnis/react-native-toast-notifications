@@ -100,7 +100,6 @@ There are lots of props to customize your toast or your can use renderToast to i
     animationDuration={250}
     successColor="green"
     dangerColor="red"
-    dangerColor="red"
     warningColor="orange"
     normalColor="gray"
     icon={<Icon />}
