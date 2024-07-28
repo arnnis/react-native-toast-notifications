@@ -70,6 +70,13 @@ toast.show("Task finished successfully", {
 });
 ```
 
+### success(), danger(), warning()
+```js
+toast.success("success");
+toast.danger("danger");
+toast.warning("warning");
+```
+
 ### update()
 
 ```js
