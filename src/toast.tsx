@@ -112,6 +112,11 @@ export interface ToastOptions {
   data?: any;
 
   swipeEnabled?: boolean;
+
+  /**
+   * Unique identifier for testing purposes
+   */
+  testID?: string;
 }
 
 export interface ToastProps extends ToastOptions {
@@ -146,6 +151,7 @@ const Toast: FC<ToastProps> = (props) => {
     placement,
     swipeEnabled,
     onPress,
+    testID
   } = props;
 
   const containerRef = useRef<View>(null);
@@ -329,6 +335,7 @@ const Toast: FC<ToastProps> = (props) => {
           onPress={() => onPress && onPress(id)}
         >
           <View
+            testID={testID}
             style={[
               styles.toastContainer,
               { maxWidth: (dims.width / 10) * 9, backgroundColor },
