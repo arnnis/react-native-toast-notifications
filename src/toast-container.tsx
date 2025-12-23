@@ -4,11 +4,23 @@ import {
   ViewStyle,
   KeyboardAvoidingView,
   Platform,
-  Dimensions, SafeAreaView,
+  Dimensions,
+  View,
 } from "react-native";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 import Toast, { ToastOptions, ToastProps } from "./toast";
 
 const { height, width } = Dimensions.get("window");
+
+// Wrapper component to handle safe area insets
+const SafeAreaWrapper: React.FC<{ children: React.ReactNode; position: 'top' | 'bottom' }> = ({ children, position }) => {
+  const insets = useSafeAreaInsets();
+  const padding = position === 'top'
+    ? { paddingTop: insets.top }
+    : { paddingBottom: insets.bottom };
+
+  return <View style={padding}>{children}</View>;
+};
 
 export interface Props extends ToastOptions {
   renderToast?(toast: ToastProps): JSX.Element;
@@ -124,13 +136,13 @@ class ToastContainer extends Component<Props, State> {
         style={[styles.container, style]}
         pointerEvents="box-none"
       >
-        <SafeAreaView>
+        <SafeAreaWrapper position="bottom">
           {toasts
             .filter((t) => !t.placement || t.placement === "bottom")
             .map((toast) => (
               <Toast key={toast.id} {...toast} />
             ))}
-        </SafeAreaView>
+        </SafeAreaWrapper>
       </KeyboardAvoidingView>
     );
   }
@@ -150,13 +162,13 @@ class ToastContainer extends Component<Props, State> {
         style={[styles.container, style]}
         pointerEvents="box-none"
       >
-        <SafeAreaView>
+        <SafeAreaWrapper position="top">
           {toasts
             .filter((t) => t.placement === "top")
             .map((toast) => (
               <Toast key={toast.id} {...toast} />
             ))}
-        </SafeAreaView>
+        </SafeAreaWrapper>
       </KeyboardAvoidingView>
     );
   }
