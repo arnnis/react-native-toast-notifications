@@ -74,7 +74,7 @@ class ToastContainer extends Component<Props, State> {
   };
 
   /**
-   * Updates a toast, To use this create you must pass an id to show method first, then pass it here to update the toast.
+   * Updates a toast. To use this, you must pass an id to show method first, then pass it here to update the toast.
    */
   update = (
     id: string,
