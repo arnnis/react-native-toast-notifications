@@ -37,76 +37,82 @@ class ToastContainer extends Component<Props, State> {
     swipeEnabled: true,
   };
 
+  areIdsEqual = (id1: string, id2: string) => {
+    return id1.replace(/--[.0-9]+$/, '') === id2.replace(/--[.0-9]+$/, '')
+  };
+
   /**
    * Shows a new toast. Returns id
    */
   show = (message: string | JSX.Element, toastOptions?: ToastOptions) => {
-    let id = toastOptions?.id || Math.random().toString();
+    const id = (toastOptions?.id ? toastOptions.id + '--' : '') + Math.random();
     const onDestroy = () => {
       toastOptions?.onClose && toastOptions?.onClose();
-      this.setState({ toasts: this.state.toasts.filter((t) => t.id !== id) });
+      this.setState(state => ({ toasts: state.toasts.filter((t) => !this.areIdsEqual(t.id, id) || t.open) }));
     };
 
+    this.hide(id);
+
     requestAnimationFrame(() => {
-      this.setState({
+      this.setState(state => ({
         toasts: [
           {
+            ...this.props,
+            ...toastOptions,
             id,
             onDestroy,
             message,
             open: true,
             onHide: () => this.hide(id),
-            ...this.props,
-            ...toastOptions,
           },
-          ...this.state.toasts.filter((t) => t.open),
+          ...state.toasts.filter((t) => t.open),
         ],
-      });
+      }));
     });
 
     return id;
   };
 
   /**
-   * Updates a toast, To use this create you must pass an id to show method first, then pass it here to update the toast.
+   * Updates a toast. To use this, you must pass an id to show method first, then pass it here to update the toast.
    */
   update = (
     id: string,
     message: string | JSX.Element,
     toastOptions?: ToastOptions
   ) => {
-    this.setState({
-      toasts: this.state.toasts.map((toast) =>
-        toast.id === id ? { ...toast, message, ...toastOptions } : toast
+    this.setState(state => ({
+      toasts: state.toasts.map((t) =>
+        this.areIdsEqual(t.id, id) ? { ...t, message, ...toastOptions } : t
       ),
-    });
+    }));
   };
 
   /**
    * Removes a toast from stack
    */
   hide = (id: string) => {
-    this.setState({
-      toasts: this.state.toasts.map((t) =>
-        t.id === id ? { ...t, open: false } : t
+    this.setState(state => ({
+      toasts: state.toasts.map((t) =>
+        this.areIdsEqual(t.id, id) && t.open ? { ...t, open: false } : t
       ),
-    });
+    }));
   };
 
   /**
    * Removes all toasts in stack
    */
   hideAll = () => {
-    this.setState({
-      toasts: this.state.toasts.map((t) => ({ ...t, open: false })),
-    });
+    this.setState(state => ({
+      toasts: state.toasts.map((t) => ({ ...t, open: false })),
+    }));
   };
 
   /**
    * Check if a toast is currently open
    */
   isOpen = (id: string) => {
-    return this.state.toasts.some((t) => t.id === id && t.open);
+    return this.state.toasts.some((t) => this.areIdsEqual(t.id, id) && t.open);
   }
 
   renderBottomToasts() {

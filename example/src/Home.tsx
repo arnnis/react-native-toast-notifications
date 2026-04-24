@@ -91,7 +91,7 @@ const Home = () => {
               placement: "center",
             });
           }}
-          style={[styles.test]}
+          style={styles.test}
         >
           Placement center
         </Text>
@@ -102,7 +102,7 @@ const Home = () => {
               animationType: "zoom-in",
             });
           }}
-          style={[styles.test]}
+          style={styles.test}
         >
           Zoom in animation type
         </Text>
@@ -126,7 +126,7 @@ const Home = () => {
           onPress={() => {
             Toast.show("Global toast call")
           }}
-          style={[styles.test]}
+          style={styles.test}
         >
           Global toast call
         </Text>
@@ -143,6 +143,15 @@ const Home = () => {
 
         <Text
           onPress={() => {
+            toast.show("Latest update", {id: 'update'});
+          }}
+          style={styles.test}
+        >
+          Toast replacing itself
+        </Text>
+
+        <Text
+          onPress={() => {
             toast.show("Press to close", {
               duration: 10000,
               onPress: (id) => {
@@ -150,7 +159,7 @@ const Home = () => {
               },
             });
           }}
-          style={[styles.test]}
+          style={styles.test}
         >
           Toast onPress & close on press
         </Text>
@@ -174,7 +183,7 @@ const Home = () => {
             inputRef.current?.focus();
             toast.show("Hi!");
           }}
-          style={[styles.test]}
+          style={styles.test}
         >
           Toast avoids keyboard
         </Text>
@@ -185,7 +194,7 @@ const Home = () => {
               onClose: () => console.log("Toast closed!"),
             });
           }}
-          style={[styles.test]}
+          style={styles.test}
         >
           onClose event
         </Text>
@@ -193,7 +202,7 @@ const Home = () => {
           onPress={() => {
             toast.hideAll();
           }}
-          style={[styles.test]}
+          style={styles.test}
         >
           Hide all open toasts
         </Text>
