@@ -86,6 +86,8 @@ toast.hide(id);
 toast.hideAll();
 ```
 
+Note: when passing an `id` to `show` it will hide the toast with that `id` automatically. 
+
 ## Customization
 
 ### `ToastProvider` props

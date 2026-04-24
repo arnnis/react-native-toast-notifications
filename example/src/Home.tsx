@@ -143,6 +143,15 @@ const Home = () => {
 
         <Text
           onPress={() => {
+            toast.show("Latest update", {id: 'update'});
+          }}
+          style={styles.test}
+        >
+          Toast replacing itself
+        </Text>
+
+        <Text
+          onPress={() => {
             toast.show("Press to close", {
               duration: 10000,
               onPress: (id) => {
