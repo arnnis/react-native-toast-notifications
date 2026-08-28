@@ -4,8 +4,9 @@ import {
   ViewStyle,
   KeyboardAvoidingView,
   Platform,
-  Dimensions, SafeAreaView,
+  Dimensions,
 } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 import Toast, { ToastOptions, ToastProps } from "./toast";
 
 const { height, width } = Dimensions.get("window");
@@ -73,11 +74,11 @@ class ToastContainer extends Component<Props, State> {
   update = (
     id: string,
     message: string | JSX.Element,
-    toastOptions?: ToastOptions
+    toastOptions?: ToastOptions,
   ) => {
     this.setState({
       toasts: this.state.toasts.map((toast) =>
-        toast.id === id ? { ...toast, message, ...toastOptions } : toast
+        toast.id === id ? { ...toast, message, ...toastOptions } : toast,
       ),
     });
   };
@@ -88,7 +89,7 @@ class ToastContainer extends Component<Props, State> {
   hide = (id: string) => {
     this.setState({
       toasts: this.state.toasts.map((t) =>
-        t.id === id ? { ...t, open: false } : t
+        t.id === id ? { ...t, open: false } : t,
       ),
     });
   };
@@ -107,7 +108,7 @@ class ToastContainer extends Component<Props, State> {
    */
   isOpen = (id: string) => {
     return this.state.toasts.some((t) => t.id === id && t.open);
-  }
+  };
 
   renderBottomToasts() {
     const { toasts } = this.state;
@@ -211,8 +212,10 @@ const styles = StyleSheet.create({
     maxWidth: "100%",
     zIndex: 999999,
     elevation: 999999,
-    alignSelf: 'center',
-    ...(Platform.OS === "web" ? { overflow: "hidden", userSelect: 'none' } : null),
+    alignSelf: "center",
+    ...(Platform.OS === "web"
+      ? { overflow: "hidden", userSelect: "none" }
+      : null),
   },
   message: {
     color: "#333",
